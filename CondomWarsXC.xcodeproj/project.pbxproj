@@ -1,0 +1,269 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DDEE45671C99BED400740415 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDEE45661C99BED400740415 /* main.cpp */; };
+		DDEE456F1C99BEE600740415 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDEE456D1C99BEE600740415 /* GLUT.framework */; };
+		DDEE45701C99BEE600740415 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDEE456E1C99BEE600740415 /* OpenGL.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DDEE45611C99BED400740415 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DD4357C41CB4AF0C00205A7F /* eligePersonaje.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = eligePersonaje.bmp; sourceTree = "<group>"; };
+		DD4357C51CB4AF0C00205A7F /* i_will_not_be.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = i_will_not_be.png; sourceTree = "<group>"; };
+		DD4357C61CB4AF0C00205A7F /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		DD4357C71CB4AF1300205A7F /* imageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageLoader.h; sourceTree = "<group>"; };
+		DDEE45631C99BED400740415 /* CondomWarsXC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CondomWarsXC; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDEE45661C99BED400740415 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		DDEE456D1C99BEE600740415 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		DDEE456E1C99BEE600740415 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DDEE45601C99BED400740415 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDEE456F1C99BEE600740415 /* GLUT.framework in Frameworks */,
+				DDEE45701C99BEE600740415 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DD4357C31CB4AF0C00205A7F /* images */ = {
+			isa = PBXGroup;
+			children = (
+				DD4357C41CB4AF0C00205A7F /* eligePersonaje.bmp */,
+				DD4357C51CB4AF0C00205A7F /* i_will_not_be.png */,
+				DD4357C61CB4AF0C00205A7F /* menu.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		DDEE455A1C99BED400740415 = {
+			isa = PBXGroup;
+			children = (
+				DDEE456D1C99BEE600740415 /* GLUT.framework */,
+				DDEE456E1C99BEE600740415 /* OpenGL.framework */,
+				DDEE45651C99BED400740415 /* CondomWarsXC */,
+				DDEE45641C99BED400740415 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DDEE45641C99BED400740415 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DDEE45631C99BED400740415 /* CondomWarsXC */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DDEE45651C99BED400740415 /* CondomWarsXC */ = {
+			isa = PBXGroup;
+			children = (
+				DD4357C71CB4AF1300205A7F /* imageLoader.h */,
+				DDEE45661C99BED400740415 /* main.cpp */,
+				DD4357C31CB4AF0C00205A7F /* images */,
+			);
+			path = CondomWarsXC;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DDEE45621C99BED400740415 /* CondomWarsXC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDEE456A1C99BED400740415 /* Build configuration list for PBXNativeTarget "CondomWarsXC" */;
+			buildPhases = (
+				DDEE455F1C99BED400740415 /* Sources */,
+				DDEE45601C99BED400740415 /* Frameworks */,
+				DDEE45611C99BED400740415 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CondomWarsXC;
+			productName = CondomWarsXC;
+			productReference = DDEE45631C99BED400740415 /* CondomWarsXC */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DDEE455B1C99BED400740415 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Tania Garrido Salido";
+				TargetAttributes = {
+					DDEE45621C99BED400740415 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = DDEE455E1C99BED400740415 /* Build configuration list for PBXProject "CondomWarsXC" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DDEE455A1C99BED400740415;
+			productRefGroup = DDEE45641C99BED400740415 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DDEE45621C99BED400740415 /* CondomWarsXC */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DDEE455F1C99BED400740415 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDEE45671C99BED400740415 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DDEE45681C99BED400740415 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DDEE45691C99BED400740415 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DDEE456B1C99BED400740415 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DDEE456C1C99BED400740415 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DDEE455E1C99BED400740415 /* Build configuration list for PBXProject "CondomWarsXC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDEE45681C99BED400740415 /* Debug */,
+				DDEE45691C99BED400740415 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDEE456A1C99BED400740415 /* Build configuration list for PBXNativeTarget "CondomWarsXC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDEE456B1C99BED400740415 /* Debug */,
+				DDEE456C1C99BED400740415 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DDEE455B1C99BED400740415 /* Project object */;
+}
