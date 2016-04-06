@@ -521,7 +521,6 @@ void display(){
     glPushMatrix();
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(1.0, 1.0, 1.0);
-
     if (menu){
         displayMenu();
     } else {
@@ -620,11 +619,16 @@ void initRendering(){
     glEnable(GL_TEXTURE_2D);
     glGenTextures(TEXTURE_COUNT, texName); //Make room for our texture
     char ruta[200];
-    sprintf(ruta,"%s%s", fullPath.c_str() , "images/eligePersonaje.bmp");
-    std::cout << ruta << std::endl;
+    sprintf(ruta,"%s%s", fullPath.c_str() , "images/menu.bmp");
     image = loadBMP(ruta);
     loadTexture(image,i++);
     delete image;
+}
+
+void timer(int value)
+{
+    glutPostRedisplay();
+    // glutTimerFunc(1000,timer,0);
 }
 
 int main(int argc, char** argv){
@@ -640,5 +644,6 @@ int main(int argc, char** argv){
     glutSpecialFunc(specialActions);
     init();
     initRendering();
+    glutTimerFunc(1000,timer,0);
     glutMainLoop();
 }
