@@ -520,6 +520,8 @@ void displayMenu(){
 void display(){
     glPushMatrix();
     glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1.0, 1.0, 1.0);
+
     if (menu){
         displayMenu();
     } else {
@@ -528,9 +530,9 @@ void display(){
         displayLives();
         displayPlayer();
         displayEnemies();
-        glutSwapBuffers();
-        glPopMatrix();
     }
+    glutSwapBuffers();
+    glPopMatrix();
 }
 
 void specialActions(int key, int x, int y){
