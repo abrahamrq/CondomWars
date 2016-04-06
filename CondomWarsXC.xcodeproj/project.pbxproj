@@ -28,7 +28,7 @@
 		DD4357C41CB4AF0C00205A7F /* eligePersonaje.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = eligePersonaje.bmp; sourceTree = "<group>"; };
 		DD4357C51CB4AF0C00205A7F /* i_will_not_be.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = i_will_not_be.png; sourceTree = "<group>"; };
 		DD4357C71CB4AF1300205A7F /* imageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageLoader.h; sourceTree = "<group>"; };
-		DD4357C81CB4B95000205A7F /* menu.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = menu.bmp; sourceTree = "<group>"; };
+		DD4357CC1CB4BC0500205A7F /* menu.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = menu.bmp; sourceTree = "<group>"; };
 		DDEE45631C99BED400740415 /* CondomWarsXC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CondomWarsXC; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDEE45661C99BED400740415 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DDEE456D1C99BEE600740415 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -53,7 +53,7 @@
 			children = (
 				DD4357C41CB4AF0C00205A7F /* eligePersonaje.bmp */,
 				DD4357C51CB4AF0C00205A7F /* i_will_not_be.png */,
-				DD4357C81CB4B95000205A7F /* menu.bmp */,
+				DD4357CC1CB4BC0500205A7F /* menu.bmp */,
 			);
 			path = images;
 			sourceTree = "<group>";
