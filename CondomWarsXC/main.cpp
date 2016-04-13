@@ -246,7 +246,7 @@ public:
         this->name = name;
         this->lives = lives;
         xPos = 0;
-        yPos = -3;
+        yPos = -3.5;
     }
     
     int getScore(){
@@ -274,6 +274,7 @@ public:
     }
     
     void display(){
+        glColor3f(0, 0, 0);
         glPushMatrix();
         glTranslated(this->xPos, this->yPos, 0);
         glScalef(.5, .5, 0.1);
@@ -328,6 +329,7 @@ public:
     }
     
     void display(){
+        glColor3f(0, 0, 0);
         glPushMatrix();
         glTranslated(this->xPos, this->yPos, 0);
         glScalef(.5, .5, 0.1);
@@ -336,8 +338,10 @@ public:
     }
     
     void move_down(){
-        if (!((xPos + .01) > 3.9)){
+        if(!(this->yPos < -3)){
             this->yPos = this->yPos - 0.1;
+        }else{
+            this->yPos = 3;
         }
     }
 };
@@ -351,7 +355,7 @@ int tenthsOfASecond = 0;
 Object enemies[10];
 int notUsed[10];
 std::string fullPath = __FILE__;
-const int TEXTURE_COUNT=1;
+const int TEXTURE_COUNT=2;
 static GLuint texName[TEXTURE_COUNT];
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -459,7 +463,7 @@ void timePassBy(int value){
 // Function to display timer
 void displayTime(){
     std::string time_formatted = format(tenthsOfASecond);
-    glColor3f(1.0, 1.0, 1.0);
+    glColor3f(0, 0, 0);
     glRasterPos2f(-4, 4);
     for (int i = 0; i < time_formatted.size(); i++){
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, time_formatted[i]);
@@ -480,7 +484,7 @@ void displayScore(){
     buffer << "Score: ";
     buffer << player.getScore();
     std::string score = buffer.str();
-    glColor3f(1.0, 1.0, 1.0);
+    glColor3f(0, 0, 0);
     glRasterPos2f(2, 4);
     for (int i = 0; i < score.size(); i++){
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, score[i]);
@@ -492,7 +496,7 @@ void displayLives(){
     buffer << "Lives: ";
     buffer << player.getLives();
     std::string lives = buffer.str();
-    glColor3f(1.0, 1.0, 1.0);
+    glColor3f(0, 0, 0);
     glRasterPos2f(-1, 4);
     for (int i = 0; i < lives.size(); i++){
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, lives[i]);
@@ -517,6 +521,24 @@ void displayMenu(){
     glEnd();
 }
 
+void displayBackground(){
+    glBindTexture(GL_TEXTURE_2D, texName[1]);
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-5.0f, -5.0f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(5.0f, -5.0f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(5.0f, 5.0f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-5.0f, 5.0f, 0);
+    glEnd();
+}
+
 void display(){
     glPushMatrix();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -524,6 +546,7 @@ void display(){
     if (menu){
         displayMenu();
     } else {
+        displayBackground();
         displayTime();
         displayScore();
         displayLives();
@@ -619,9 +642,11 @@ void initRendering(){
     glEnable(GL_TEXTURE_2D);
     glGenTextures(TEXTURE_COUNT, texName); //Make room for our texture
     char ruta[200];
-    sprintf(ruta,"%s%s", fullPath.c_str() , "images/menu.bmp");
+    sprintf(ruta,"%s%s", fullPath.c_str() , "images/menu1.bmp");
     image = loadBMP(ruta);
     loadTexture(image,i++);
+    sprintf(ruta,"%s%s", fullPath.c_str() , "images/fondo.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
     delete image;
 }
 
