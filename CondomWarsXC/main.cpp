@@ -359,7 +359,19 @@ public:
     }
 
     bool collide_with(Player player){
-        return false;
+        float x_right = this->xPos + 0.25;
+        float x_left = this->xPos - 0.25;
+        float y_top = this->yPos - 0.25;
+        float y_down = this->yPos - 0.25;
+        float player_x_right = player.getXPos() + 0.25;
+        float player_x_left = player.getXPos() - 0.25;
+        float player_y_top = player.getYPos() - 0.25;
+        float player_y_down = player.getYPos() - 0.25;
+        bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
+        if (col){
+            //PLAY SOUND
+        }
+        return col;
     }
     
     void move_down(){
