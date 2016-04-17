@@ -262,6 +262,14 @@ public:
         yPos = -3.5;
     }
     
+    float getXPos(){
+        return this->xPos;
+    }
+    
+    float getYPos(){
+        return this->yPos;
+    }
+    
     int getScore(){
         return this->score;
     }
@@ -367,8 +375,10 @@ public:
         float player_x_left = player.getXPos() - 0.25;
         float player_y_top = player.getYPos() - 0.25;
         float player_y_down = player.getYPos() - 0.25;
+        
         bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
         if (col){
+            std::cout<<"hey"<<std::endl;
             //PLAY SOUND
         }
         return col;
@@ -383,7 +393,7 @@ public:
                 player.setLives(player.getLives() - 1);
             }
         } else {
-            if(!(this->yPos < -3)){
+            if(!(this->yPos < -4)){
                 this->yPos = this->yPos - 0.1;
             }else{
                 reset_position();
@@ -468,7 +478,7 @@ void generateEnemies(){
     
     for (int i = 0; i < 5; i++) {
         random = rand() % 8 - 4;
-        enemies[i] = Object(1, random);
+        enemies[i] = Object(0, random);
     }
 }
 
