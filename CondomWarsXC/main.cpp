@@ -28,8 +28,8 @@ using namespace std;
 #define MODEL_COUNT 10
 #define LEIA_MOD 0
 #define HAN_MOD 1
-//#define BACTERIA_1_MOD 1
-//#define SOAP_1_MOD 2
+#define BOTTLE_MOD 1
+#define SPERM_MOD 2
 //#define SOAP_2_MOD 3
 //#define TOOTHPASTE_MOD 4
 
@@ -348,6 +348,11 @@ public:
         glPushMatrix();
         glTranslated(this->xPos, this->yPos, 0);
         glScalef(.5, .5, 0.1);
+        if (this->type == 0){
+            glmDraw(&models[BOTTLE_MOD], GLM_COLOR | GLM_FLAT);
+        } else if (this->type == 1){
+            glmDraw(&models[SPERM_MOD], GLM_COLOR | GLM_FLAT);
+        }
         glutWireSphere(.5, 10, 10);
         glPopMatrix();
     }
@@ -616,7 +621,6 @@ void specialActions(int key, int x, int y){
             }
             break;
     }
-    glutPostRedisplay();
 }
 
 void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
@@ -705,6 +709,16 @@ void initRendering(){
     models[HAN_MOD] = *glmReadOBJ(ruta_modelos.c_str());
     glmUnitize(&models[HAN_MOD]);
     glmVertexNormals(&models[HAN_MOD], 90.0, GL_TRUE);
+    ruta_modelos = fullPath + "objects/babybottle.obj";
+    std::cout << "Filepath: " << ruta_modelos << std::endl;
+    models[BOTTLE_MOD] = *glmReadOBJ(ruta_modelos.c_str());
+    glmUnitize(&models[BOTTLE_MOD]);
+    glmVertexNormals(&models[BOTTLE_MOD], 90.0, GL_TRUE);
+    ruta_modelos = fullPath + "objects/sperm.obj";
+    std::cout << "Filepath: " << ruta_modelos << std::endl;
+    models[SPERM_MOD] = *glmReadOBJ(ruta_modelos.c_str());
+    glmUnitize(&models[SPERM_MOD]);
+    glmVertexNormals(&models[SPERM_MOD], 90.0, GL_TRUE);
 }
 
 void timer(int value)
