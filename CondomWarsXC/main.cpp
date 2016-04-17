@@ -34,7 +34,6 @@ using namespace std;
 //#define TOOTHPASTE_MOD 4
 
 GLMmodel models[MODEL_COUNT];
-Player player;
 
 
 Image::Image(char* ps, int w, int h) : pixels(ps), width(w), height(h)
@@ -314,6 +313,8 @@ public:
         yPos = -3;
     }
 };
+
+Player player;
 
 class Object{
 private:
