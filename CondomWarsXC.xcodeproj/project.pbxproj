@@ -48,6 +48,30 @@
 		DDCFB14F1CC42D76006F2796 /* glmimg_sim.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glmimg_sim.c; path = ../../CondomWarsXC/glmimg_sim.c; sourceTree = "<group>"; };
 		DDCFB1501CC42D76006F2796 /* glmimg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glmimg.c; path = ../../CondomWarsXC/glmimg.c; sourceTree = "<group>"; };
 		DDCFB1511CC42D76006F2796 /* glmint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glmint.h; path = ../../CondomWarsXC/glmint.h; sourceTree = "<group>"; };
+		DDCFB15C1CC437A5006F2796 /* Water_Sparkling.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Water_Sparkling.jpg; sourceTree = "<group>"; };
+		DDCFB15D1CC437A5006F2796 /* bacteria1.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = bacteria1.mtl; sourceTree = "<group>"; };
+		DDCFB15E1CC437A5006F2796 /* bacteria1.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = bacteria1.obj; sourceTree = "<group>"; };
+		DDCFB1601CC437A5006F2796 /* hair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hair.png; sourceTree = "<group>"; };
+		DDCFB1611CC437A5006F2796 /* han face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "han face.png"; sourceTree = "<group>"; };
+		DDCFB1621CC437A5006F2796 /* tatoine_han.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tatoine_han.jpg; sourceTree = "<group>"; };
+		DDCFB1631CC437A5006F2796 /* han.fbx */ = {isa = PBXFileReference; lastKnownFileType = file; path = han.fbx; sourceTree = "<group>"; };
+		DDCFB1641CC437A5006F2796 /* han.mb */ = {isa = PBXFileReference; lastKnownFileType = file; path = han.mb; sourceTree = "<group>"; };
+		DDCFB1651CC437A5006F2796 /* han.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = han.mtl; sourceTree = "<group>"; };
+		DDCFB1661CC437A5006F2796 /* han.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = han.obj; sourceTree = "<group>"; };
+		DDCFB1681CC437A5006F2796 /* chest.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chest.JPG; sourceTree = "<group>"; };
+		DDCFB1691CC437A5006F2796 /* face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face.png; sourceTree = "<group>"; };
+		DDCFB16A1CC437A5006F2796 /* hair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hair.png; sourceTree = "<group>"; };
+		DDCFB16B1CC437A5006F2796 /* leia.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = leia.mtl; sourceTree = "<group>"; };
+		DDCFB16C1CC437A5006F2796 /* leia.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = leia.obj; sourceTree = "<group>"; };
+		DDCFB16E1CC437A5006F2796 /* Material___1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Material___1.png"; sourceTree = "<group>"; };
+		DDCFB16F1CC437A5006F2796 /* player.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = player.mtl; sourceTree = "<group>"; };
+		DDCFB1701CC437A5006F2796 /* player.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = player.obj; sourceTree = "<group>"; };
+		DDCFB1711CC437A5006F2796 /* soap.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = soap.mtl; sourceTree = "<group>"; };
+		DDCFB1721CC437A5006F2796 /* soap.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = soap.obj; sourceTree = "<group>"; };
+		DDCFB1731CC437A5006F2796 /* soap2.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = soap2.mtl; sourceTree = "<group>"; };
+		DDCFB1741CC437A5006F2796 /* soap2.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = soap2.obj; sourceTree = "<group>"; };
+		DDCFB1761CC437A5006F2796 /* toothpaste.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = toothpaste.mtl; sourceTree = "<group>"; };
+		DDCFB1771CC437A5006F2796 /* toothpaste.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = toothpaste.obj; sourceTree = "<group>"; };
 		DDEE45631C99BED400740415 /* CondomWarsXC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CondomWarsXC; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDEE45661C99BED400740415 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DDEE456D1C99BEE600740415 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -120,6 +144,78 @@
 			path = gtx;
 			sourceTree = "<group>";
 		};
+		DDCFB15A1CC437A5006F2796 /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				DDCFB15B1CC437A5006F2796 /* bacteria1 */,
+				DDCFB15D1CC437A5006F2796 /* bacteria1.mtl */,
+				DDCFB15E1CC437A5006F2796 /* bacteria1.obj */,
+				DDCFB15F1CC437A5006F2796 /* han */,
+				DDCFB1631CC437A5006F2796 /* han.fbx */,
+				DDCFB1641CC437A5006F2796 /* han.mb */,
+				DDCFB1651CC437A5006F2796 /* han.mtl */,
+				DDCFB1661CC437A5006F2796 /* han.obj */,
+				DDCFB1671CC437A5006F2796 /* leia */,
+				DDCFB16B1CC437A5006F2796 /* leia.mtl */,
+				DDCFB16C1CC437A5006F2796 /* leia.obj */,
+				DDCFB16D1CC437A5006F2796 /* player */,
+				DDCFB16F1CC437A5006F2796 /* player.mtl */,
+				DDCFB1701CC437A5006F2796 /* player.obj */,
+				DDCFB1711CC437A5006F2796 /* soap.mtl */,
+				DDCFB1721CC437A5006F2796 /* soap.obj */,
+				DDCFB1731CC437A5006F2796 /* soap2.mtl */,
+				DDCFB1741CC437A5006F2796 /* soap2.obj */,
+				DDCFB1751CC437A5006F2796 /* texture */,
+				DDCFB1761CC437A5006F2796 /* toothpaste.mtl */,
+				DDCFB1771CC437A5006F2796 /* toothpaste.obj */,
+			);
+			name = objects;
+			path = condomwarsxc/objects;
+			sourceTree = SOURCE_ROOT;
+		};
+		DDCFB15B1CC437A5006F2796 /* bacteria1 */ = {
+			isa = PBXGroup;
+			children = (
+				DDCFB15C1CC437A5006F2796 /* Water_Sparkling.jpg */,
+			);
+			path = bacteria1;
+			sourceTree = "<group>";
+		};
+		DDCFB15F1CC437A5006F2796 /* han */ = {
+			isa = PBXGroup;
+			children = (
+				DDCFB1601CC437A5006F2796 /* hair.png */,
+				DDCFB1611CC437A5006F2796 /* han face.png */,
+				DDCFB1621CC437A5006F2796 /* tatoine_han.jpg */,
+			);
+			path = han;
+			sourceTree = "<group>";
+		};
+		DDCFB1671CC437A5006F2796 /* leia */ = {
+			isa = PBXGroup;
+			children = (
+				DDCFB1681CC437A5006F2796 /* chest.JPG */,
+				DDCFB1691CC437A5006F2796 /* face.png */,
+				DDCFB16A1CC437A5006F2796 /* hair.png */,
+			);
+			path = leia;
+			sourceTree = "<group>";
+		};
+		DDCFB16D1CC437A5006F2796 /* player */ = {
+			isa = PBXGroup;
+			children = (
+				DDCFB16E1CC437A5006F2796 /* Material___1.png */,
+			);
+			path = player;
+			sourceTree = "<group>";
+		};
+		DDCFB1751CC437A5006F2796 /* texture */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = texture;
+			sourceTree = "<group>";
+		};
 		DDEE455A1C99BED400740415 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +237,7 @@
 		DDEE45651C99BED400740415 /* CondomWarsXC */ = {
 			isa = PBXGroup;
 			children = (
+				DDCFB15A1CC437A5006F2796 /* objects */,
 				DDCFB12F1CC42C94006F2796 /* glm */,
 				DD4357C71CB4AF1300205A7F /* imageLoader.h */,
 				DDEE45661C99BED400740415 /* main.cpp */,

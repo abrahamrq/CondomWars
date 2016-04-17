@@ -27,6 +27,7 @@ using namespace std;
 //Amount of models and model ids
 #define MODEL_COUNT 10
 #define LEIA_MOD 0
+#define HAN_MOD 1
 //#define BACTERIA_1_MOD 1
 //#define SOAP_1_MOD 2
 //#define SOAP_2_MOD 3
@@ -665,6 +666,12 @@ void initRendering(){
     models[LEIA_MOD] = *glmReadOBJ(ruta_modelos.c_str());
     glmUnitize(&models[LEIA_MOD]);
     glmVertexNormals(&models[LEIA_MOD], 90.0, GL_TRUE);
+    
+    ruta_modelos = fullPath + "objects/han.obj";
+    std::cout << "Filepath: " << ruta_modelos << std::endl;
+    models[HAN_MOD] = *glmReadOBJ(ruta_modelos.c_str());
+    glmUnitize(&models[HAN_MOD]);
+    glmVertexNormals(&models[HAN_MOD], 90.0, GL_TRUE);
 }
 
 void timer(int value)
