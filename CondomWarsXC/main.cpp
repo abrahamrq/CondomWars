@@ -454,14 +454,14 @@ void initializeNotUsed(){
 void generateEnemies(){
     int random;
     
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 5; i++) {
         random = rand() % 8 - 4;
         enemies[i] = Object(1, random);
     }
 }
 
 void displayEnemies(){
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 5; i++) {
         if (!(notUsed[i] == 0)){
             enemies[i].display();
             enemies[i].move_down();
