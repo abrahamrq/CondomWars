@@ -369,13 +369,13 @@ public:
     bool collide_with(Player player){
         float x_right = this->xPos + 0.25;
         float x_left = this->xPos - 0.25;
-        float y_top = this->yPos - 0.25;
+        float y_top = this->yPos + 0.25;
         float y_down = this->yPos - 0.25;
         float player_x_right = player.getXPos() + 0.25;
         float player_x_left = player.getXPos() - 0.25;
-        float player_y_top = player.getYPos() - 0.25;
-        float player_y_down = player.getYPos() - 0.25;
-        
+        float player_y_top = player.getYPos() + 0.5;
+        float player_y_down = player.getYPos() - 0.5;
+        std::cout << "object: " << x_left << ", " << x_right << ", " << y_down << ", " << y_top << "player: " << player_x_left << ", " << player_x_right << ", " << player_y_down << ", " << player_y_top << std::endl;
         bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
         if (col){
             std::cout<<"hey"<<std::endl;
@@ -476,14 +476,14 @@ void initializeNotUsed(){
 void generateEnemies(){
     int random;
     
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 1; i++) {
         random = rand() % 8 - 4;
         enemies[i] = Object(0, random);
     }
 }
 
 void displayEnemies(){
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 1; i++) {
         if (!(notUsed[i] == 0)){
             enemies[i].display();
             enemies[i].move_down();
@@ -625,7 +625,6 @@ void specialActions(int key, int x, int y){
             }
             break;
     }
-    glutPostRedisplay();
 }
 
 void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
