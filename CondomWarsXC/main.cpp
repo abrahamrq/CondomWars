@@ -351,7 +351,7 @@ public:
     }
 
     void reset_position(){
-        this->xPos = rand() % 6 - 3;
+        this->xPos = rand() % 8 - 4;
         this->yPos = 3;
         this->type =  rand() % 2;
     }
