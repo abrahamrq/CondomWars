@@ -698,23 +698,23 @@ void initRendering(){
     sprintf(ruta,"%s%s", fullPath.c_str() , "images/fondo.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     delete image;
-    std::string ruta_modelos = fullPath + "objects/leia.obj";
+    std::string ruta_modelos = fullPath + "objects/leia/leia.obj";
     std::cout << "Filepath: " << ruta_modelos << std::endl;
     models[LEIA_MOD] = *glmReadOBJ(ruta_modelos.c_str());
     glmUnitize(&models[LEIA_MOD]);
     glmVertexNormals(&models[LEIA_MOD], 90.0, GL_TRUE);
     
-    ruta_modelos = fullPath + "objects/han.obj";
+    ruta_modelos = fullPath + "objects/han/han.obj";
     std::cout << "Filepath: " << ruta_modelos << std::endl;
     models[HAN_MOD] = *glmReadOBJ(ruta_modelos.c_str());
     glmUnitize(&models[HAN_MOD]);
     glmVertexNormals(&models[HAN_MOD], 90.0, GL_TRUE);
-    ruta_modelos = fullPath + "objects/babybottle.obj";
+    ruta_modelos = fullPath + "objects/babybottle/babybottle.obj";
     std::cout << "Filepath: " << ruta_modelos << std::endl;
     models[BOTTLE_MOD] = *glmReadOBJ(ruta_modelos.c_str());
     glmUnitize(&models[BOTTLE_MOD]);
     glmVertexNormals(&models[BOTTLE_MOD], 90.0, GL_TRUE);
-    ruta_modelos = fullPath + "objects/sperm.obj";
+    ruta_modelos = fullPath + "objects/sperm/sperm.obj";
     std::cout << "Filepath: " << ruta_modelos << std::endl;
     models[SPERM_MOD] = *glmReadOBJ(ruta_modelos.c_str());
     glmUnitize(&models[SPERM_MOD]);
