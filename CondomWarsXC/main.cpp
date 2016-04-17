@@ -367,6 +367,7 @@ public:
         float player_x_left = player.getXPos() - 0.25;
         float player_y_top = player.getYPos() - 0.25;
         float player_y_down = player.getYPos() - 0.25;
+        std::cout << "object: " << x_left << ", " << x_right << ", " << y_down << ", " << y_top << "player: " << player_x_left << ", " << player_x_right << ", " << player_y_down << ", " << player_y_top << std::endl;
         bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
         if (col){
             //PLAY SOUND
