@@ -357,9 +357,9 @@ public:
         glTranslated(this->xPos, this->yPos, 0);
         glScalef(.5, .5, 0.1);
         if (this->type == 0){
-            glmDraw(&models[BOTTLE_MOD], GLM_COLOR | GLM_FLAT);
+            glmDraw(&models[SPERM_MOD], GLM_COLOR | GLM_FLAT);
         } else if (this->type == 1){
-            glmDraw(&models[BOTTLE_MOD], GLM_COLOR | GLM_FLAT);
+            glmDraw(&models[SPERM_MOD], GLM_COLOR | GLM_FLAT);
         }
         glutWireSphere(.5, 10, 10);
         glPopMatrix();
@@ -719,16 +719,16 @@ void initRendering(){
     glmUnitize(&models[HAN_MOD]);
     glmVertexNormals(&models[HAN_MOD], 90.0, GL_TRUE);
 
-    ruta_modelos = fullPath + "objects/babybottle/babybottle.obj";
-    std::cout << "Filepath: " << ruta_modelos << std::endl;
-    models[BOTTLE_MOD] = *glmReadOBJ(ruta_modelos.c_str());
-    glmUnitize(&models[BOTTLE_MOD]);
-    glmVertexNormals(&models[BOTTLE_MOD], 90.0, GL_TRUE);
-    // ruta_modelos = fullPath + "objects/sperm/sperm.obj";
+    // ruta_modelos = fullPath + "objects/babybottle/babybottle.obj";
     // std::cout << "Filepath: " << ruta_modelos << std::endl;
-    // models[SPERM_MOD] = *glmReadOBJ(ruta_modelos.c_str());
-    // glmUnitize(&models[SPERM_MOD]);
-    // glmVertexNormals(&models[SPERM_MOD], 90.0, GL_TRUE);
+    // models[BOTTLE_MOD] = *glmReadOBJ(ruta_modelos.c_str());
+    // glmUnitize(&models[BOTTLE_MOD]);
+    // glmVertexNormals(&models[BOTTLE_MOD], 90.0, GL_TRUE);
+    ruta_modelos = fullPath + "objects/sperm/sperm.obj";
+    std::cout << "Filepath: " << ruta_modelos << std::endl;
+    models[SPERM_MOD] = *glmReadOBJ(ruta_modelos.c_str());
+    glmUnitize(&models[SPERM_MOD]);
+    glmVertexNormals(&models[SPERM_MOD], 90.0, GL_TRUE);
 }
 
 void timer(int value)
