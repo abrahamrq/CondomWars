@@ -16,12 +16,24 @@
 #include <math.h>
 #include <algorithm>
 #include "imageLoader.h"
+#include "glm.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 #include <assert.h>
 #include <fstream>
 
 using namespace std;
+
+//Amount of models and model ids
+#define MODEL_COUNT 10
+#define LEIA_MOD 0
+//#define BACTERIA_1_MOD 1
+//#define SOAP_1_MOD 2
+//#define SOAP_2_MOD 3
+//#define TOOTHPASTE_MOD 4
+
+GLMmodel models[MODEL_COUNT];
+
 
 Image::Image(char* ps, int w, int h) : pixels(ps), width(w), height(h)
 {
@@ -278,7 +290,7 @@ public:
         glPushMatrix();
         glTranslated(this->xPos, this->yPos, 0);
         glScalef(.5, .5, 0.1);
-        glutWireCube(1);
+        glmDraw(&models[LEIA_MOD], GLM_COLOR | GLM_FLAT);
         glPopMatrix();
     }
     
@@ -648,6 +660,11 @@ void initRendering(){
     sprintf(ruta,"%s%s", fullPath.c_str() , "images/fondo.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     delete image;
+    std::string ruta_modelos = fullPath + "objects/leia.obj";
+    std::cout << "Filepath: " << ruta_modelos << std::endl;
+    models[LEIA_MOD] = *glmReadOBJ(ruta_modelos.c_str());
+    glmUnitize(&models[LEIA_MOD]);
+    glmVertexNormals(&models[LEIA_MOD], 90.0, GL_TRUE);
 }
 
 void timer(int value)
