@@ -34,6 +34,7 @@ using namespace std;
 //#define TOOTHPASTE_MOD 4
 
 GLMmodel models[MODEL_COUNT];
+Player player;
 
 
 Image::Image(char* ps, int w, int h) : pixels(ps), width(w), height(h)
@@ -349,12 +350,31 @@ public:
         glutWireSphere(.5, 10, 10);
         glPopMatrix();
     }
+
+    void reset_position(){
+        this->xPos = rand() % 6 - 3;
+        this->yPos = 3;
+        this->type =  rand() % 2;
+    }
+
+    bool collide_with(Player player){
+        return false;
+    }
     
     void move_down(){
-        if(!(this->yPos < -3)){
-            this->yPos = this->yPos - 0.1;
-        }else{
-            this->yPos = 3;
+        if (collide_with(player)){
+            reset_position();
+            if (type == 0){
+                player.setScore(player.getScore() + 1);
+            } else if (type == 1){
+                player.setLives(player.getLives() - 1);
+            }
+        } else {
+            if(!(this->yPos < -3)){
+                this->yPos = this->yPos - 0.1;
+            }else{
+                reset_position();
+            }
         }
     }
 };
@@ -363,7 +383,6 @@ public:
 //////////////////////////// GLOBAL VARIABLES //////////////////////////////////
 
 bool paused = false, started = false, menu = true;
-Player player;
 int tenthsOfASecond = 0;
 Object enemies[10];
 int notUsed[10];
