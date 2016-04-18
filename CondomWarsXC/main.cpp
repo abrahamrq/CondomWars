@@ -28,8 +28,9 @@ using namespace std;
 #define MODEL_COUNT 10
 #define LEIA_MOD 0
 #define HAN_MOD 1
-#define BOTTLE_MOD 1
-#define SPERM_MOD 2
+#define CONDOM_MOD 2
+#define SPERM_MOD 3
+#define BEAR_MOD 4
 //#define SOAP_2_MOD 3
 //#define TOOTHPASTE_MOD 4
 
@@ -352,23 +353,25 @@ public:
     }
     
     void display(){
-        glColor3f(0, 0, 0);
+        glColor3f(5, 5, 0);
         glPushMatrix();
         glTranslated(this->xPos, this->yPos, 0);
         glScalef(.5, .5, 0.1);
         if (this->type == 0){
-            glmDraw(&models[SPERM_MOD], GLM_COLOR | GLM_FLAT);
+            glmDraw(&models[CONDOM_MOD], GLM_FLAT);
         } else if (this->type == 1){
-            glmDraw(&models[SPERM_MOD], GLM_COLOR | GLM_FLAT);
+            glmDraw(&models[SPERM_MOD], GLM_FLAT);
+        } else if (this->type == 2){
+            glScalef(.5, .5, 0.1);
+            glmDraw(&models[BEAR_MOD],GLM_FLAT);
         }
-        glutWireSphere(.5, 10, 10);
         glPopMatrix();
     }
 
     void reset_position(){
         this->xPos = rand() % 8 - 4;
         this->yPos = 3;
-        this->type =  rand() % 2;
+        this->type =  rand() % 3;
     }
 
     bool collide_with(Player player){
@@ -391,12 +394,12 @@ public:
     
     void move_down(){
         if (collide_with(player)){
-            reset_position();
-            if (type == 0){
+            if (type == 0 || type == 2){
                 player.setScore(player.getScore() + 1);
             } else if (type == 1){
                 player.setLives(player.getLives() - 1);
             }
+            reset_position();
         } else {
             if(!(this->yPos < -4)){
                 this->yPos = this->yPos - 0.1;
@@ -415,7 +418,8 @@ int tenthsOfASecond = 0;
 Object enemies[10];
 int notUsed[10];
 std::string fullPath = __FILE__;
-const int TEXTURE_COUNT=2;
+const int TEXTURE_COUNT = 2;
+const int TOTAL_OBJECTS = 5;
 static GLuint texName[TEXTURE_COUNT];
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -481,14 +485,14 @@ void initializeNotUsed(){
 void generateEnemies(){
     int random;
     
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < TOTAL_OBJECTS; i++) {
         random = rand() % 8 - 4;
         enemies[i] = Object(0, random);
     }
 }
 
 void displayEnemies(){
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < TOTAL_OBJECTS; i++) {
         if (!(notUsed[i] == 0)){
             enemies[i].display();
             enemies[i].move_down();
@@ -497,8 +501,8 @@ void displayEnemies(){
 }
 
 void paintObjects(){
-    if (tenthsOfASecond % 10 == 0) {
-        for (int i = 0; i < 10; i++) {
+    if (tenthsOfASecond % TOTAL_OBJECTS == 0) {
+        for (int i = 0; i < TOTAL_OBJECTS; i++) {
             if (notUsed[i] == 0){
                 notUsed[i] = 1;
                 break;
@@ -606,7 +610,7 @@ void display(){
     if (menu){
         displayMenu();
     } else {
-        displayBackground();
+        //displayBackground();
         displayTime();
         displayScore();
         displayLives();
@@ -687,7 +691,7 @@ void init(){
     glEnable(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-    glClearColor (0.5, 0.5, 0.5, 1.0);
+    glClearColor (1, 0, 0, 1.0);
     glColor3f(0.0, 0.0, 0.0);
     generatePlayer();
     generateEnemies();
@@ -719,16 +723,23 @@ void initRendering(){
     glmUnitize(&models[HAN_MOD]);
     glmVertexNormals(&models[HAN_MOD], 90.0, GL_TRUE);
 
-    // ruta_modelos = fullPath + "objects/babybottle/babybottle.obj";
-    // std::cout << "Filepath: " << ruta_modelos << std::endl;
-    // models[BOTTLE_MOD] = *glmReadOBJ(ruta_modelos.c_str());
-    // glmUnitize(&models[BOTTLE_MOD]);
-    // glmVertexNormals(&models[BOTTLE_MOD], 90.0, GL_TRUE);
+    ruta_modelos = fullPath + "objects/condom/condom.obj";
+    std::cout << "Filepath: " << ruta_modelos << std::endl;
+    models[CONDOM_MOD] = *glmReadOBJ(ruta_modelos.c_str());
+    glmUnitize(&models[CONDOM_MOD]);
+    glmVertexNormals(&models[CONDOM_MOD], 90.0, GL_TRUE);
+    
     ruta_modelos = fullPath + "objects/sperm/sperm.obj";
     std::cout << "Filepath: " << ruta_modelos << std::endl;
     models[SPERM_MOD] = *glmReadOBJ(ruta_modelos.c_str());
     glmUnitize(&models[SPERM_MOD]);
     glmVertexNormals(&models[SPERM_MOD], 90.0, GL_TRUE);
+    
+    ruta_modelos = fullPath + "objects/teddy bear/bear.obj";
+    std::cout << "Filepath: " << ruta_modelos << std::endl;
+    models[BEAR_MOD] = *glmReadOBJ(ruta_modelos.c_str());
+    glmUnitize(&models[BEAR_MOD]);
+    glmVertexNormals(&models[BEAR_MOD], 90.0, GL_TRUE);
 }
 
 void timer(int value)
