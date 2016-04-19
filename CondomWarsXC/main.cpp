@@ -16,7 +16,7 @@
 #include <math.h>
 #include <algorithm>
 #include "imageLoader.h"
-#include "glm.h"
+#include "glm/glm.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 #include <assert.h>
