@@ -44,6 +44,7 @@ bool started = false;
 bool menu = true;
 int current_baby = 0;
 int current_game = 0;
+int babyOfASecond = 50;
 
 
 Image::Image(char* ps, int w, int h) : pixels(ps), width(w), height(h)
@@ -333,7 +334,7 @@ public:
         this->score = 0;
         this->lives = 3;
         xPos = 0;
-        yPos = -3;
+        yPos = -3.5;
     }
 };
 
@@ -441,13 +442,17 @@ public:
     }
 };
 
+
 // Function for the baby
 void deadTimer(int value){
+    if (babyOfASecond <= 0){
+        player.setLives(0);
+    }
     if (current_baby == value){
-        glutPostRedisplay();
-        if (started) {
-            player.setLives(0);
+        if (!paused){
+            babyOfASecond--;
         }
+        glutTimerFunc(100, deadTimer, value);
     }
 }
 
@@ -457,7 +462,7 @@ void babyTimer(int value){
         glutPostRedisplay();
         if (started) {
             show_baby = true;
-            glutTimerFunc(5000, deadTimer, current_baby);
+            glutTimerFunc(100, deadTimer, current_baby);
         }
     }
 }
@@ -479,7 +484,9 @@ public:
         glColor3ub(237, 184, 235); 
         glTranslated(this->xPos, this->yPos, 0);
         glScalef(.5, .5, 0.1);
-        glRotatef (-50, 0.0, 1.0, 0.0); 
+        // glRotatef (30, 0.0, 0.0, 1.0); 
+        // glRotatef (30, 0.0, 1.0, 0.0); 
+        // glRotatef (30, 1.0, 0.0, 0.0); 
         glmDraw(&models[CRIB_MOD], GLM_COLOR | GLM_FLAT);
         glPopMatrix();
         if (collide_with(player)){
@@ -487,7 +494,7 @@ public:
             if (time_to_show_baby > 3000){
                 time_to_show_baby -= 1000;
             }
-            glutTimerFunc(time_to_show_baby, babyTimer, 0);
+            glutTimerFunc(time_to_show_baby, babyTimer, current_game);
         }
     }
 
@@ -504,6 +511,7 @@ public:
         bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
         if (col){
             current_baby++;
+            babyOfASecond = 50;
             // std::cout<<"hey"<<std::endl;
             //PLAY SOUND
         }
@@ -621,6 +629,7 @@ void resetGame(){
     current_baby++;
     player.reset();
     current_game++;
+    babyOfASecond = 50;
     resetEnemies();
 }
 
@@ -693,6 +702,16 @@ void displayTime(){
     }
 }
 
+// Function to display timer
+void displayBabyTime(){
+    std::string time_formatted = format(babyOfASecond);
+    glColor3f(1, 0, 0);
+    glRasterPos2f(3, -3);
+    for (int i = 0; i < time_formatted.size(); i++){
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, time_formatted[i]);
+    }
+}
+
 // Function to generate player with defaults
 void generatePlayer(){
     player = Player(0, "Luke", 3);
@@ -708,6 +727,7 @@ void displayPlayer(){
 
 void displayBaby(){
     baby.display();
+    displayBabyTime();
 }
 
 
