@@ -2,7 +2,6 @@ newmtl blinn1SG
 Kd 0.40 0.23 0.16
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-Ni 1.00
 Ks 0.50 0.50 0.50
 newmtl blinn2SG
 Kd 0.6 0.47945 0.46301

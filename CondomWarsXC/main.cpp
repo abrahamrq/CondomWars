@@ -48,12 +48,16 @@ Mix_Chunk *gHigh = NULL;
 Mix_Chunk *gbaby = NULL;
 Mix_Chunk *gLow = NULL;
 bool show_baby = false;
-int time_to_show_baby = 1000;
+int time_to_show_baby = 10000;
 bool paused = false;
 bool started = false;
 bool menu = true;
+bool info = false;
+bool creadores = false;
+bool historia = false;
 int current_baby = 0;
 int current_game = 0;
+int babyOfASecond = 50;
 
 
 Image::Image(char* ps, int w, int h) : pixels(ps), width(w), height(h)
@@ -343,7 +347,7 @@ public:
         this->score = 0;
         this->lives = 3;
         xPos = 0;
-        yPos = -3;
+        yPos = -3.5;
     }
 };
 
@@ -458,13 +462,17 @@ public:
     }
 };
 
+
 // Function for the baby
 void deadTimer(int value){
+    if (babyOfASecond <= 0){
+        player.setLives(0);
+    }
     if (current_baby == value){
-        glutPostRedisplay();
-        if (started) {
-            player.setLives(0);
+        if (!paused){
+            babyOfASecond--;
         }
+        glutTimerFunc(100, deadTimer, value);
     }
 }
 
@@ -481,7 +489,7 @@ void babyTimer(int value){
             } else {
                 Mix_PlayChannel( 1, gbaby, 0 );
             }
-            glutTimerFunc(5000, deadTimer, current_baby);
+            glutTimerFunc(100, deadTimer, current_baby);
         }
     }
 }
@@ -503,16 +511,18 @@ public:
         glColor3ub(237, 184, 235); 
         glTranslated(this->xPos, this->yPos, 0);
         glScalef(.5, .5, 0.1);
-        glRotatef (-50, 0.0, 1.0, 0.0); 
+        // glRotatef (30, 0.0, 0.0, 1.0); 
+        // glRotatef (30, 0.0, 1.0, 0.0); 
+        // glRotatef (30, 1.0, 0.0, 0.0); 
         glmDraw(&models[CRIB_MOD], GLM_COLOR | GLM_FLAT);
         glPopMatrix();
         if (collide_with(player)){
             
             show_baby = false;
-            if (time_to_show_baby > 3000){
-                time_to_show_baby -= 1000;
+            if (time_to_show_baby > 5000){
+                time_to_show_baby -= 500;
             }
-            glutTimerFunc(time_to_show_baby, babyTimer, 0);
+            glutTimerFunc(time_to_show_baby, babyTimer, current_game);
         }
     }
 
@@ -529,6 +539,7 @@ public:
         bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
         if (col){
             current_baby++;
+            babyOfASecond = 50;
             // std::cout<<"hey"<<std::endl;
             //PLAY SOUND
             
@@ -545,7 +556,7 @@ Object enemies[10];
 Baby baby;
 int notUsed[10];
 std::string fullPath = __FILE__;
-const int TEXTURE_COUNT = 3;
+const int TEXTURE_COUNT = 6;
 const int TOTAL_OBJECTS = 4;
 static GLuint texName[TEXTURE_COUNT];
 
@@ -647,6 +658,7 @@ void resetGame(){
     current_baby++;
     player.reset();
     current_game++;
+    babyOfASecond = 50;
     resetEnemies();
 }
 
@@ -719,6 +731,16 @@ void displayTime(){
     }
 }
 
+// Function to display timer
+void displayBabyTime(){
+    std::string time_formatted = format(babyOfASecond);
+    glColor3f(1, 0, 0);
+    glRasterPos2f(3, -3);
+    for (int i = 0; i < time_formatted.size(); i++){
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, time_formatted[i]);
+    }
+}
+
 // Function to generate player with defaults
 void generatePlayer(){
     player = Player(0, "Luke", 3);
@@ -734,6 +756,7 @@ void displayPlayer(){
 
 void displayBaby(){
     baby.display();
+    displayBabyTime();
 }
 
 
@@ -778,6 +801,72 @@ void displayMenu(){
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glBindTexture(GL_TEXTURE_2D, texName[0]);
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-4.5f, -4.5f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(4.5f, -4.5f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(4.5f, 4.5f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-4.5f, 4.5f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
+void displayHistoria(){
+    glEnable(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glBindTexture(GL_TEXTURE_2D, texName[3]);
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-4.5f, -4.5f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(4.5f, -4.5f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(4.5f, 4.5f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-4.5f, 4.5f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
+void displayInfo(){
+    glEnable(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glBindTexture(GL_TEXTURE_2D, texName[4]);
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-4.5f, -4.5f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(4.5f, -4.5f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(4.5f, 4.5f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-4.5f, 4.5f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
+void displayCreadores(){
+    glEnable(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glBindTexture(GL_TEXTURE_2D, texName[5]);
     glBegin(GL_QUADS);
     //Asignar la coordenada de textura 0,0 al vertice
     glTexCoord2f(0.0f, 0.0f);
@@ -865,7 +954,15 @@ void display(){
     glColor3f(1.0, 1.0, 1.0);
     if (menu){
         glColor3f(1.0, 1.0, 1.0);
-        displayMenu();
+        if (historia){
+            displayHistoria();
+        } else if (creadores){
+            displayCreadores();
+        } else if (info){
+            displayInfo();
+        } else{
+            displayMenu();
+        }
     } else if (started){
         displayBackground();
         displayTime();
@@ -903,16 +1000,9 @@ void specialActions(int key, int x, int y){
 
 void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
     switch (theKey){
-        case 'r':
-        case 'R':
-            paused = true;
-            started = false;
-            tenthsOfASecond = 0;
-            player.reset();
-            break;
         case 'p':
         case 'P':
-            if (started && !gameover){
+            if (started && !gameover && !menu){
                 if (paused){
                     glutTimerFunc(100, timePassBy, 0);
                 }
@@ -921,7 +1011,7 @@ void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
             break;
         case 'h':
         case 'H':
-            if (!started){
+            if (!started && !info && !creadores && !historia){
                 leia =  false;
                 gameover = false;
                 started = true;
@@ -933,7 +1023,7 @@ void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
             break;
         case 'l':
         case 'L':
-            if (!started){
+            if (!started && !info && !creadores && !historia){
                 leia = true;
                 started = true;
                 menu = false;
@@ -941,6 +1031,32 @@ void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
                 paused = false;
                 glutTimerFunc(100, timePassBy, 0);
                 glutTimerFunc(time_to_show_baby, babyTimer, current_game);
+            }
+            break;
+        case 'i':
+        case 'I':
+            if (!started && menu){
+                info = true;
+            }
+            break;
+        case 's':
+        case 'S':
+            if (!started && menu){
+                historia = true;
+            }
+            break;
+        case 'c':
+        case 'C':
+            if (!started && menu){
+                creadores = true;
+            }
+            break;
+        case 'b':
+        case 'B':
+            if (!started && menu){
+                info = false;
+                historia = false;
+                creadores = false;
             }
             break;
         case 27:
@@ -993,9 +1109,20 @@ void initRendering(){
     image = loadBMP(ruta);
     loadTexture(image,i++);
     sprintf(ruta,"%s%s", fullPath.c_str() , "images/fondo_star_wars.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    image = loadBMP(ruta);
+    loadTexture(image,i++);
     sprintf(ruta,"%s%s", fullPath.c_str() , "images/gameover.bmp");
-    image = loadBMP(ruta);loadTexture(image,i++);
+    image = loadBMP(ruta);
+    loadTexture(image,i++);
+    sprintf(ruta,"%s%s", fullPath.c_str() , "images/historia.bmp");
+    image = loadBMP(ruta);
+    loadTexture(image,i++);
+    sprintf(ruta,"%s%s", fullPath.c_str() , "images/info.bmp");
+    image = loadBMP(ruta);
+    loadTexture(image,i++);
+    sprintf(ruta,"%s%s", fullPath.c_str() , "images/creadores.bmp");
+    image = loadBMP(ruta);
+    loadTexture(image,i++);
     delete image;
     std::string ruta_modelos = fullPath + "objects/leia/leia.obj";
     std::cout << "Filepath: " << ruta_modelos << std::endl;
