@@ -32,8 +32,7 @@ using namespace std;
 #define CONDOM_MOD 2
 #define SPERM_MOD 3
 #define R2_MOD 4
-//#define SOAP_2_MOD 3
-//#define TOOTHPASTE_MOD 4
+#define CRIB_MOD 5
 
 GLMmodel models[MODEL_COUNT];
 bool leia = true;
@@ -434,6 +433,47 @@ public:
         }
     }
 };
+
+class Baby{
+private:
+    float xPos;
+    float yPos;
+    
+public:
+    Baby(){
+        xPos = 3.5;
+        yPos = -3.5;
+    }
+    
+    void display(){
+        glPushMatrix();
+        glColor3f(5, 5, 0); 
+        glTranslated(this->xPos, this->yPos, 0);
+        glScalef(.5, .5, 0.1);
+        glRotatef (-100, 0.0, 1.0, 0.0);
+        // glRotatef (-10, 1.0, 0.0, 0.0);  
+        glmDraw(&models[CRIB_MOD], GLM_COLOR | GLM_FLAT);
+        glPopMatrix();
+    }
+
+    bool collide_with(Player player){
+        float x_right = this->xPos + 0.25;
+        float x_left = this->xPos - 0.25;
+        float y_top = this->yPos + 0.25;
+        float y_down = this->yPos - 0.25;
+        float player_x_right = player.getXPos() + 0.25;
+        float player_x_left = player.getXPos() - 0.25;
+        float player_y_top = player.getYPos() + 0.5;
+        float player_y_down = player.getYPos() - 0.5;
+        // std::cout << "object: " << x_left << ", " << x_right << ", " << y_down << ", " << y_top << "player: " << player_x_left << ", " << player_x_right << ", " << player_y_down << ", " << player_y_top << std::endl;
+        bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
+        if (col){
+            // std::cout<<"hey"<<std::endl;
+            //PLAY SOUND
+        }
+        return col;
+    }
+};
 ////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////// GLOBAL VARIABLES //////////////////////////////////
@@ -441,6 +481,7 @@ public:
 bool paused = false, started = false, menu = true;
 int tenthsOfASecond = 0;
 Object enemies[10];
+Baby baby;
 int notUsed[10];
 std::string fullPath = __FILE__;
 const int TEXTURE_COUNT = 3;
@@ -621,9 +662,18 @@ void generatePlayer(){
     player = Player(0, "Luke", 3);
 }
 
+void generateBaby(){
+    baby = Baby();
+}
+
 void displayPlayer(){
     player.display();
 }
+
+void displayBaby(){
+    baby.display();
+}
+
 
 void displayScore(){
     std::ostringstream buffer;
@@ -743,6 +793,7 @@ void display(){
         displayLives();
         displayPlayer();
         displayEnemies();
+        displayBaby();
     }
     if (gameover){
         glColor3f(1.0, 1.0, 1.0);
@@ -836,6 +887,7 @@ void init(){
     glClearColor (0, 0, 0, 1.0);
     glColor3f(0.0, 0.0, 0.0);
     generatePlayer();
+    generateBaby();
     generateEnemies();
 }
 
@@ -883,6 +935,12 @@ void initRendering(){
     models[R2_MOD] = *glmReadOBJ(ruta_modelos.c_str());
     glmUnitize(&models[R2_MOD]);
     glmVertexNormals(&models[R2_MOD], 90.0, GL_TRUE);
+
+    ruta_modelos = fullPath + "objects/crib/Baby_Carriage.obj";
+    std::cout << "Filepath: " << ruta_modelos << std::endl;
+    models[CRIB_MOD] = *glmReadOBJ(ruta_modelos.c_str());
+    glmUnitize(&models[CRIB_MOD]);
+    glmVertexNormals(&models[CRIB_MOD], 90.0, GL_TRUE);
 }
 
 void timer(int value)
