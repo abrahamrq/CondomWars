@@ -3,7 +3,6 @@
 
 newmtl Color_004
 	Ns 10.0000
-	Ni 1.5000
 	d 1.0000
 	Tr 0.0000
 	Tf 1.0000 1.0000 1.0000 
@@ -14,7 +13,6 @@ newmtl Color_004
 
 newmtl Color_000
 	Ns 10.0000
-	Ni 1.5000
 	d 1.0000
 	Tr 0.0000
 	Tf 1.0000 1.0000 1.0000 
@@ -25,7 +23,6 @@ newmtl Color_000
 
 newmtl Color_A01
 	Ns 10.0000
-	Ni 1.5000
 	d 1.0000
 	Tr 0.0000
 	Tf 1.0000 1.0000 1.0000 
