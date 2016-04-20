@@ -325,6 +325,7 @@ public:
     
     void reset(){
         this->score = 0;
+        this->lives = 3;
         xPos = 0;
         yPos = -3;
     }
@@ -345,7 +346,14 @@ public:
         yPos = 0;
     }
     
-    Object(int type, float xPos){
+    Object(int random, float xPos){
+        if (random <= 8){
+            this->type = 1;
+        } else if (random == 9){
+            this->type = 0;
+        } else{
+            this->type = 2;
+        }
         this->type = type;
         this->xPos = xPos;
         this->yPos = 3;
@@ -380,8 +388,15 @@ public:
 
     void reset_position(){
         this->xPos = rand() % 8 - 4;
-        this->yPos = 3;
-        this->type =  rand() % 3;
+        this->yPos = rand() % 5 + 3;
+        int random = rand() % 11;
+        if (random <= 8){
+            this->type = 1;
+        } else if (random == 9){
+            this->type = 0;
+        } else{
+            this->type = 2;
+        }
     }
 
     bool collide_with(Player player){
@@ -429,7 +444,7 @@ Object enemies[10];
 int notUsed[10];
 std::string fullPath = __FILE__;
 const int TEXTURE_COUNT = 3;
-const int TOTAL_OBJECTS = 5;
+const int TOTAL_OBJECTS = 4;
 static GLuint texName[TEXTURE_COUNT];
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -486,29 +501,6 @@ std::string format(int tenthsOfASecond){
     return buffer.str();
 }
 
-void initializeNotUsed(){
-    for (int i = 0; i < 10; i++) {
-        notUsed[i] = 0;
-    }
-}
-
-void generateEnemies(){
-    int random;
-    
-    for (int i = 0; i < TOTAL_OBJECTS; i++) {
-        enemies[i] = Object(rand() % 3,  rand() % 8 - 4);
-    }
-}
-
-void displayEnemies(){
-    for (int i = 0; i < TOTAL_OBJECTS; i++) {
-        if (!(notUsed[i] == 0)){
-            enemies[i].display();
-            enemies[i].move_down();
-        }
-    }
-}
-
 void paintObjects(){
     if (tenthsOfASecond % TOTAL_OBJECTS == 0) {
         for (int i = 0; i < TOTAL_OBJECTS; i++) {
@@ -517,16 +509,6 @@ void paintObjects(){
                 break;
             }
         }
-    }
-}
-
-void checkForGameOver(){
-    if (player.getLives() <= 0){
-        gameover = true;
-        started = false;
-        leia =  false;
-        menu = false;
-        paused = false;
     }
 }
 
@@ -542,6 +524,88 @@ void timePassBy(int value){
     paintObjects();
 }
 
+typedef enum {RESET,PAUSE,FINISH};
+
+void resetEnemies(){
+    for (int i = 0; i < TOTAL_OBJECTS; i++) {
+        enemies[i].reset_position();
+    }
+}
+
+void resetGame(){
+    paused = false;
+    started = false;
+    menu = true;
+    gameover = false;
+    tenthsOfASecond = 0;
+    started = false;
+    leia =  true;
+    player.reset();
+    resetEnemies();
+}
+
+void onMenu(int opcion) {
+    switch(opcion) {
+        case RESET:
+            resetGame();
+            break;
+        case PAUSE:
+            if (started && !gameover){
+                if (paused){
+                    glutTimerFunc(100, timePassBy, 0);
+                }
+                paused = !paused;
+            }
+            break;
+        case FINISH:
+            exit(0);    
+            break;
+    }
+}
+
+void creacionMenu(void) {
+    int mainMenu;
+    mainMenu = glutCreateMenu(onMenu);
+    glutSetMenu(mainMenu);
+    glutAddMenuEntry("Reiniciar Juego", RESET);
+    glutAddMenuEntry("Pausar Juego", PAUSE);
+    glutAddMenuEntry("Terminar Juego", FINISH);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
+
+}
+
+void initializeNotUsed(){
+    for (int i = 0; i < 10; i++) {
+        notUsed[i] = 0;
+    }
+}
+
+void generateEnemies(){
+    int random;
+    for (int i = 0; i < TOTAL_OBJECTS; i++) {
+        enemies[i] = Object(rand() % 10,  rand() % 8 - 4);
+    }
+}
+
+void displayEnemies(){
+    for (int i = 0; i < TOTAL_OBJECTS; i++) {
+        if (!(notUsed[i] == 0)){
+            enemies[i].display();
+            enemies[i].move_down();
+        }
+    }
+}
+
+void checkForGameOver(){
+    if (player.getLives() <= 0){
+        gameover = true;
+        started = false;
+        leia =  true;
+        menu = false;
+        paused = false;
+    }
+}
+
 // Function to display timer
 void displayTime(){
     std::string time_formatted = format(tenthsOfASecond);
@@ -554,7 +618,7 @@ void displayTime(){
 
 // Function to generate player with defaults
 void generatePlayer(){
-    player = Player(0, "Luke", 1);
+    player = Player(0, "Luke", 3);
 }
 
 void displayPlayer(){
@@ -840,6 +904,7 @@ int main(int argc, char** argv){
     glutSpecialFunc(specialActions);
     init();
     initRendering();
+    creacionMenu();
     glutTimerFunc(1000,timer,0);
     glutMainLoop();
 }
