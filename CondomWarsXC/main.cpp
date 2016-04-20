@@ -4,7 +4,6 @@
 // A0
 #ifdef __APPLE__
 #include <GLUT/glut.h>
-#include <SDL2_mixer/SDL_mixer.h>
 #else
 #include <GL/glut.h>
 #endif
@@ -18,6 +17,9 @@
 #include <algorithm>
 #include "imageLoader.h"
 #include "glm/glm.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_opengl.h>
+#include <SDL2_Mixer/SDL_Mixer.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 #include <assert.h>
@@ -38,6 +40,14 @@ using namespace std;
 GLMmodel models[MODEL_COUNT];
 bool leia = true;
 bool gameover = false;
+//The music that will be played
+Mix_Music *gMusic = NULL;
+
+//The sound effects that will be used
+Mix_Music *gScratch = NULL;
+Mix_Chunk *gHigh = NULL;
+Mix_Chunk *gMedium = NULL;
+Mix_Chunk *gLow = NULL;
 
 
 Image::Image(char* ps, int w, int h) : pixels(ps), width(w), height(h)
@@ -397,6 +407,13 @@ public:
         bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
         if (col){
             // std::cout<<"hey"<<std::endl;
+            gHigh = Mix_LoadWAV( "/Users/taniagarridosalido/Dropbox/ITESM-ITC Decimo Semestre/Graficas/CondomWars/CondomWarsXC/audio/high.wav");
+            if( gHigh == NULL )
+            {
+                printf( "Failed to load gSaber sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+            } else {
+                Mix_PlayChannel( 1, gHigh, 0 );
+            }
             //PLAY SOUND
         }
         return col;
@@ -664,7 +681,25 @@ void displayBackground(){
     glDisable(GL_TEXTURE_2D);
 }
 
+void cargarmusica(){
+    //Load sound effects
+    gScratch = Mix_LoadMUS( "/Users/taniagarridosalido/Dropbox/ITESM-ITC Decimo Semestre/Graficas/CondomWars/CondomWarsXC/audio/imperial_march.wav" );
+    if( gScratch == NULL )
+    {
+        printf( "Failed to load gSaber sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+    } else {
+        if( Mix_PlayingMusic() == 0 )
+        {
+            //Play the music
+            if( Mix_PlayMusic( gScratch, -1 ) == -1 )
+            {
+            }
+        }
+    }
+}
+
 void display(){
+    cargarmusica();
     checkForGameOver();
     glPushMatrix();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -768,6 +803,13 @@ void reshape(int w, int h){
 }
 
 void init(){
+    //Initialize SDL_mixer
+    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 1024 ) < 0 )
+    {
+        printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+    }
+
+    
     //Habilitar el uso de texturas
     glClearColor (0, 0, 0, 1.0);
     glColor3f(0.0, 0.0, 0.0);

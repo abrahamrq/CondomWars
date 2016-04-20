@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DDCFB1521CC42D76006F2796 /* glm_util.c in Sources */ = {isa = PBXBuildFile; fileRef = DDCFB1481CC42D76006F2796 /* glm_util.c */; };
-		DDCFB1531CC42D76006F2796 /* glm.c in Sources */ = {isa = PBXBuildFile; fileRef = DDCFB1491CC42D76006F2796 /* glm.c */; };
-		DDCFB1541CC42D76006F2796 /* glmimg_devil.c in Sources */ = {isa = PBXBuildFile; fileRef = DDCFB14B1CC42D76006F2796 /* glmimg_devil.c */; };
-		DDCFB1551CC42D76006F2796 /* glmimg_jpg.c in Sources */ = {isa = PBXBuildFile; fileRef = DDCFB14C1CC42D76006F2796 /* glmimg_jpg.c */; };
-		DDCFB1561CC42D76006F2796 /* glmimg_png.c in Sources */ = {isa = PBXBuildFile; fileRef = DDCFB14D1CC42D76006F2796 /* glmimg_png.c */; };
-		DDCFB1571CC42D76006F2796 /* glmimg_sdl.c in Sources */ = {isa = PBXBuildFile; fileRef = DDCFB14E1CC42D76006F2796 /* glmimg_sdl.c */; };
-		DDCFB1581CC42D76006F2796 /* glmimg_sim.c in Sources */ = {isa = PBXBuildFile; fileRef = DDCFB14F1CC42D76006F2796 /* glmimg_sim.c */; };
-		DDCFB1591CC42D76006F2796 /* glmimg.c in Sources */ = {isa = PBXBuildFile; fileRef = DDCFB1501CC42D76006F2796 /* glmimg.c */; };
+		DD1237E91CC71E4F00D383D4 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD1237E81CC71E4F00D383D4 /* SDL2.framework */; };
+		DD1238F81CC7228E00D383D4 /* glm_util.c in Sources */ = {isa = PBXBuildFile; fileRef = DD1238EC1CC7228E00D383D4 /* glm_util.c */; };
+		DD1238F91CC7228E00D383D4 /* glm.c in Sources */ = {isa = PBXBuildFile; fileRef = DD1238ED1CC7228E00D383D4 /* glm.c */; };
+		DD1238FA1CC7228E00D383D4 /* glmimg_devil.c in Sources */ = {isa = PBXBuildFile; fileRef = DD1238EF1CC7228E00D383D4 /* glmimg_devil.c */; };
+		DD1238FB1CC7228E00D383D4 /* glmimg_jpg.c in Sources */ = {isa = PBXBuildFile; fileRef = DD1238F01CC7228E00D383D4 /* glmimg_jpg.c */; };
+		DD1238FC1CC7228E00D383D4 /* glmimg_png.c in Sources */ = {isa = PBXBuildFile; fileRef = DD1238F11CC7228E00D383D4 /* glmimg_png.c */; };
+		DD1238FD1CC7228E00D383D4 /* glmimg_sdl.c in Sources */ = {isa = PBXBuildFile; fileRef = DD1238F21CC7228E00D383D4 /* glmimg_sdl.c */; };
+		DD1238FE1CC7228E00D383D4 /* glmimg_sim.c in Sources */ = {isa = PBXBuildFile; fileRef = DD1238F31CC7228E00D383D4 /* glmimg_sim.c */; };
+		DD1238FF1CC7228E00D383D4 /* glmimg.c in Sources */ = {isa = PBXBuildFile; fileRef = DD1238F41CC7228E00D383D4 /* glmimg.c */; };
+		DD12390B1CC7279E00D383D4 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD12390A1CC7279E00D383D4 /* SDL2_mixer.framework */; };
 		DDEE45671C99BED400740415 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDEE45661C99BED400740415 /* main.cpp */; };
 		DDEE456F1C99BEE600740415 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDEE456D1C99BEE600740415 /* GLUT.framework */; };
 		DDEE45701C99BEE600740415 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDEE456E1C99BEE600740415 /* OpenGL.framework */; };
@@ -33,21 +35,43 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DD1237D11CC7161C00D383D4 /* glm.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = glm.c; sourceTree = "<group>"; };
+		DD1237D21CC7161C00D383D4 /* glm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glm.h; sourceTree = "<group>"; };
+		DD1237D31CC7161C00D383D4 /* glm_util.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = glm_util.c; sourceTree = "<group>"; };
+		DD1237D41CC7161C00D383D4 /* glmimg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = glmimg.c; sourceTree = "<group>"; };
+		DD1237D51CC7161C00D383D4 /* glmimg_devil.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = glmimg_devil.c; sourceTree = "<group>"; };
+		DD1237D61CC7161C00D383D4 /* glmimg_jpg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = glmimg_jpg.c; sourceTree = "<group>"; };
+		DD1237D71CC7161C00D383D4 /* glmimg_png.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = glmimg_png.c; sourceTree = "<group>"; };
+		DD1237D81CC7161C00D383D4 /* glmimg_sdl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = glmimg_sdl.c; sourceTree = "<group>"; };
+		DD1237D91CC7161C00D383D4 /* glmimg_sim.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = glmimg_sim.c; sourceTree = "<group>"; };
+		DD1237DA1CC7161C00D383D4 /* glmint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glmint.h; sourceTree = "<group>"; };
+		DD1237E81CC71E4F00D383D4 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		DD1238EC1CC7228E00D383D4 /* glm_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glm_util.c; sourceTree = "<group>"; };
+		DD1238ED1CC7228E00D383D4 /* glm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glm.c; sourceTree = "<group>"; };
+		DD1238EE1CC7228E00D383D4 /* glm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glm.h; sourceTree = "<group>"; };
+		DD1238EF1CC7228E00D383D4 /* glmimg_devil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg_devil.c; sourceTree = "<group>"; };
+		DD1238F01CC7228E00D383D4 /* glmimg_jpg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg_jpg.c; sourceTree = "<group>"; };
+		DD1238F11CC7228E00D383D4 /* glmimg_png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg_png.c; sourceTree = "<group>"; };
+		DD1238F21CC7228E00D383D4 /* glmimg_sdl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg_sdl.c; sourceTree = "<group>"; };
+		DD1238F31CC7228E00D383D4 /* glmimg_sim.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg_sim.c; sourceTree = "<group>"; };
+		DD1238F41CC7228E00D383D4 /* glmimg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg.c; sourceTree = "<group>"; };
+		DD1238F51CC7228E00D383D4 /* glmint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glmint.h; sourceTree = "<group>"; };
+		DD1238F61CC7228E00D383D4 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
+		DD1238F71CC7228E00D383D4 /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
+		DD1239061CC7258500D383D4 /* prompt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prompt.png; sourceTree = "<group>"; };
+		DD1239071CC7258500D383D4 /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		DD12390A1CC7279E00D383D4 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_mixer.framework; sourceTree = "<group>"; };
+		DD12390C1CC730F100D383D4 /* beat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = beat.wav; path = audio/beat.wav; sourceTree = "<group>"; };
+		DD12390D1CC730F100D383D4 /* high.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = high.wav; path = audio/high.wav; sourceTree = "<group>"; };
+		DD12390E1CC730F100D383D4 /* imperial_march.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = imperial_march.wav; path = audio/imperial_march.wav; sourceTree = "<group>"; };
+		DD12390F1CC730F100D383D4 /* low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = low.wav; path = audio/low.wav; sourceTree = "<group>"; };
+		DD1239101CC730F100D383D4 /* medium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = medium.wav; path = audio/medium.wav; sourceTree = "<group>"; };
+		DD1239111CC730F100D383D4 /* scratch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = scratch.wav; path = audio/scratch.wav; sourceTree = "<group>"; };
 		DD4357C41CB4AF0C00205A7F /* eligePersonaje.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = eligePersonaje.bmp; sourceTree = "<group>"; };
 		DD4357C51CB4AF0C00205A7F /* i_will_not_be.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = i_will_not_be.png; sourceTree = "<group>"; };
 		DD4357C71CB4AF1300205A7F /* imageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageLoader.h; sourceTree = "<group>"; };
 		DD4357CC1CB4BC0500205A7F /* menu.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = menu.bmp; sourceTree = "<group>"; };
 		DD9E0C281CBDFC900017CF47 /* fondo.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = fondo.bmp; sourceTree = "<group>"; };
-		DDCFB1481CC42D76006F2796 /* glm_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glm_util.c; path = ../../CondomWarsXC/glm_util.c; sourceTree = "<group>"; };
-		DDCFB1491CC42D76006F2796 /* glm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glm.c; path = ../../CondomWarsXC/glm.c; sourceTree = "<group>"; };
-		DDCFB14A1CC42D76006F2796 /* glm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glm.h; path = ../../CondomWarsXC/glm.h; sourceTree = "<group>"; };
-		DDCFB14B1CC42D76006F2796 /* glmimg_devil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glmimg_devil.c; path = ../../CondomWarsXC/glmimg_devil.c; sourceTree = "<group>"; };
-		DDCFB14C1CC42D76006F2796 /* glmimg_jpg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glmimg_jpg.c; path = ../../CondomWarsXC/glmimg_jpg.c; sourceTree = "<group>"; };
-		DDCFB14D1CC42D76006F2796 /* glmimg_png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glmimg_png.c; path = ../../CondomWarsXC/glmimg_png.c; sourceTree = "<group>"; };
-		DDCFB14E1CC42D76006F2796 /* glmimg_sdl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glmimg_sdl.c; path = ../../CondomWarsXC/glmimg_sdl.c; sourceTree = "<group>"; };
-		DDCFB14F1CC42D76006F2796 /* glmimg_sim.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glmimg_sim.c; path = ../../CondomWarsXC/glmimg_sim.c; sourceTree = "<group>"; };
-		DDCFB1501CC42D76006F2796 /* glmimg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glmimg.c; path = ../../CondomWarsXC/glmimg.c; sourceTree = "<group>"; };
-		DDCFB1511CC42D76006F2796 /* glmint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glmint.h; path = ../../CondomWarsXC/glmint.h; sourceTree = "<group>"; };
 		DDCFB15C1CC437A5006F2796 /* Water_Sparkling.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Water_Sparkling.jpg; sourceTree = "<group>"; };
 		DDCFB15D1CC437A5006F2796 /* bacteria1.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = bacteria1.mtl; sourceTree = "<group>"; };
 		DDCFB15E1CC437A5006F2796 /* bacteria1.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = bacteria1.obj; sourceTree = "<group>"; };
@@ -83,6 +107,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD1237E91CC71E4F00D383D4 /* SDL2.framework in Frameworks */,
+				DD12390B1CC7279E00D383D4 /* SDL2_mixer.framework in Frameworks */,
 				DDEE456F1C99BEE600740415 /* GLUT.framework in Frameworks */,
 				DDEE45701C99BEE600740415 /* OpenGL.framework in Frameworks */,
 			);
@@ -91,6 +117,106 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD1237CF1CC7161C00D383D4 /* glm */ = {
+			isa = PBXGroup;
+			children = (
+				DD1237D01CC7161C00D383D4 /* detail */,
+				DD1237D11CC7161C00D383D4 /* glm.c */,
+				DD1237D21CC7161C00D383D4 /* glm.h */,
+				DD1237D31CC7161C00D383D4 /* glm_util.c */,
+				DD1237D41CC7161C00D383D4 /* glmimg.c */,
+				DD1237D51CC7161C00D383D4 /* glmimg_devil.c */,
+				DD1237D61CC7161C00D383D4 /* glmimg_jpg.c */,
+				DD1237D71CC7161C00D383D4 /* glmimg_png.c */,
+				DD1237D81CC7161C00D383D4 /* glmimg_sdl.c */,
+				DD1237D91CC7161C00D383D4 /* glmimg_sim.c */,
+				DD1237DA1CC7161C00D383D4 /* glmint.h */,
+				DD1237DB1CC7161C00D383D4 /* gtc */,
+				DD1237DC1CC7161C00D383D4 /* gtx */,
+				DD1237DD1CC7161C00D383D4 /* objects */,
+			);
+			path = glm;
+			sourceTree = "<group>";
+		};
+		DD1237D01CC7161C00D383D4 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				DD1238EC1CC7228E00D383D4 /* glm_util.c */,
+				DD1238ED1CC7228E00D383D4 /* glm.c */,
+				DD1238EE1CC7228E00D383D4 /* glm.h */,
+				DD1238EF1CC7228E00D383D4 /* glmimg_devil.c */,
+				DD1238F01CC7228E00D383D4 /* glmimg_jpg.c */,
+				DD1238F11CC7228E00D383D4 /* glmimg_png.c */,
+				DD1238F21CC7228E00D383D4 /* glmimg_sdl.c */,
+				DD1238F31CC7228E00D383D4 /* glmimg_sim.c */,
+				DD1238F41CC7228E00D383D4 /* glmimg.c */,
+				DD1238F51CC7228E00D383D4 /* glmint.h */,
+				DD1238F61CC7228E00D383D4 /* Makefile.am */,
+				DD1238F71CC7228E00D383D4 /* Makefile.in */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		DD1237DB1CC7161C00D383D4 /* gtc */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = gtc;
+			sourceTree = "<group>";
+		};
+		DD1237DC1CC7161C00D383D4 /* gtx */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = gtx;
+			sourceTree = "<group>";
+		};
+		DD1237DD1CC7161C00D383D4 /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				DD1237DE1CC7161C00D383D4 /* bacteria1 */,
+				DD1237DF1CC7161C00D383D4 /* player */,
+				DD1237E01CC7161C00D383D4 /* texture */,
+			);
+			path = objects;
+			sourceTree = "<group>";
+		};
+		DD1237DE1CC7161C00D383D4 /* bacteria1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = bacteria1;
+			sourceTree = "<group>";
+		};
+		DD1237DF1CC7161C00D383D4 /* player */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = player;
+			sourceTree = "<group>";
+		};
+		DD1237E01CC7161C00D383D4 /* texture */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = texture;
+			sourceTree = "<group>";
+		};
+		DD1239091CC7259500D383D4 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				DD12390C1CC730F100D383D4 /* beat.wav */,
+				DD12390D1CC730F100D383D4 /* high.wav */,
+				DD12390E1CC730F100D383D4 /* imperial_march.wav */,
+				DD12390F1CC730F100D383D4 /* low.wav */,
+				DD1239101CC730F100D383D4 /* medium.wav */,
+				DD1239111CC730F100D383D4 /* scratch.wav */,
+				DD1239061CC7258500D383D4 /* prompt.png */,
+				DD1239071CC7258500D383D4 /* readme.txt */,
+			);
+			name = audio;
+			sourceTree = "<group>";
+		};
 		DD4357C31CB4AF0C00205A7F /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,48 +226,6 @@
 				DD4357CC1CB4BC0500205A7F /* menu.bmp */,
 			);
 			path = images;
-			sourceTree = "<group>";
-		};
-		DDCFB12F1CC42C94006F2796 /* glm */ = {
-			isa = PBXGroup;
-			children = (
-				DDCFB1481CC42D76006F2796 /* glm_util.c */,
-				DDCFB1491CC42D76006F2796 /* glm.c */,
-				DDCFB14A1CC42D76006F2796 /* glm.h */,
-				DDCFB14B1CC42D76006F2796 /* glmimg_devil.c */,
-				DDCFB14C1CC42D76006F2796 /* glmimg_jpg.c */,
-				DDCFB14D1CC42D76006F2796 /* glmimg_png.c */,
-				DDCFB14E1CC42D76006F2796 /* glmimg_sdl.c */,
-				DDCFB14F1CC42D76006F2796 /* glmimg_sim.c */,
-				DDCFB1501CC42D76006F2796 /* glmimg.c */,
-				DDCFB1511CC42D76006F2796 /* glmint.h */,
-				DDCFB1301CC42C94006F2796 /* detail */,
-				DDCFB1311CC42C94006F2796 /* gtc */,
-				DDCFB1321CC42C94006F2796 /* gtx */,
-			);
-			name = glm;
-			path = condomwarsxc/glm;
-			sourceTree = SOURCE_ROOT;
-		};
-		DDCFB1301CC42C94006F2796 /* detail */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = detail;
-			sourceTree = "<group>";
-		};
-		DDCFB1311CC42C94006F2796 /* gtc */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = gtc;
-			sourceTree = "<group>";
-		};
-		DDCFB1321CC42C94006F2796 /* gtx */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = gtx;
 			sourceTree = "<group>";
 		};
 		DDCFB15A1CC437A5006F2796 /* objects */ = {
@@ -219,6 +303,8 @@
 		DDEE455A1C99BED400740415 = {
 			isa = PBXGroup;
 			children = (
+				DD12390A1CC7279E00D383D4 /* SDL2_mixer.framework */,
+				DD1237E81CC71E4F00D383D4 /* SDL2.framework */,
 				DDEE456D1C99BEE600740415 /* GLUT.framework */,
 				DDEE456E1C99BEE600740415 /* OpenGL.framework */,
 				DDEE45651C99BED400740415 /* CondomWarsXC */,
@@ -237,8 +323,9 @@
 		DDEE45651C99BED400740415 /* CondomWarsXC */ = {
 			isa = PBXGroup;
 			children = (
+				DD1239091CC7259500D383D4 /* audio */,
+				DD1237CF1CC7161C00D383D4 /* glm */,
 				DDCFB15A1CC437A5006F2796 /* objects */,
-				DDCFB12F1CC42C94006F2796 /* glm */,
 				DD4357C71CB4AF1300205A7F /* imageLoader.h */,
 				DDEE45661C99BED400740415 /* main.cpp */,
 				DD4357C31CB4AF0C00205A7F /* images */,
@@ -302,15 +389,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDCFB1531CC42D76006F2796 /* glm.c in Sources */,
-				DDCFB1521CC42D76006F2796 /* glm_util.c in Sources */,
-				DDCFB1591CC42D76006F2796 /* glmimg.c in Sources */,
-				DDCFB1581CC42D76006F2796 /* glmimg_sim.c in Sources */,
-				DDCFB1561CC42D76006F2796 /* glmimg_png.c in Sources */,
+				DD1238F91CC7228E00D383D4 /* glm.c in Sources */,
+				DD1238F81CC7228E00D383D4 /* glm_util.c in Sources */,
+				DD1238FF1CC7228E00D383D4 /* glmimg.c in Sources */,
+				DD1238FE1CC7228E00D383D4 /* glmimg_sim.c in Sources */,
+				DD1238FC1CC7228E00D383D4 /* glmimg_png.c in Sources */,
 				DDEE45671C99BED400740415 /* main.cpp in Sources */,
-				DDCFB1571CC42D76006F2796 /* glmimg_sdl.c in Sources */,
-				DDCFB1551CC42D76006F2796 /* glmimg_jpg.c in Sources */,
-				DDCFB1541CC42D76006F2796 /* glmimg_devil.c in Sources */,
+				DD1238FD1CC7228E00D383D4 /* glmimg_sdl.c in Sources */,
+				DD1238FB1CC7228E00D383D4 /* glmimg_jpg.c in Sources */,
+				DD1238FA1CC7228E00D383D4 /* glmimg_devil.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +486,15 @@
 		DDEE456B1C99BED400740415 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(PROJECT_DIR)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/Frameworks/SDL2.framework/Versions/A",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -406,6 +502,15 @@
 		DDEE456C1C99BED400740415 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(PROJECT_DIR)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/Frameworks/SDL2.framework/Versions/A",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
