@@ -45,7 +45,7 @@ Mix_Music *gMusic = NULL;
 //The sound effects that will be used
 Mix_Music *gScratch = NULL;
 Mix_Chunk *gHigh = NULL;
-Mix_Chunk *gMedium = NULL;
+Mix_Chunk *gbaby = NULL;
 Mix_Chunk *gLow = NULL;
 bool show_baby = false;
 int time_to_show_baby = 1000;
@@ -474,6 +474,13 @@ void babyTimer(int value){
         glutPostRedisplay();
         if (started) {
             show_baby = true;
+            gbaby = Mix_LoadWAV( "/Users/taniagarridosalido/Dropbox/ITESM-ITC Decimo Semestre/Graficas/CondomWars/CondomWarsXC/audio/cry.wav");
+            if( gbaby == NULL )
+            {
+                printf( "Failed to load gSaber sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+            } else {
+                Mix_PlayChannel( 1, gbaby, 0 );
+            }
             glutTimerFunc(5000, deadTimer, current_baby);
         }
     }
@@ -500,6 +507,7 @@ public:
         glmDraw(&models[CRIB_MOD], GLM_COLOR | GLM_FLAT);
         glPopMatrix();
         if (collide_with(player)){
+            
             show_baby = false;
             if (time_to_show_baby > 3000){
                 time_to_show_baby -= 1000;
@@ -523,6 +531,7 @@ public:
             current_baby++;
             // std::cout<<"hey"<<std::endl;
             //PLAY SOUND
+            
         }
         return col;
     }
