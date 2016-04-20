@@ -479,8 +479,8 @@ public:
         glColor3ub(237, 184, 235); 
         glTranslated(this->xPos, this->yPos, 0);
         glScalef(.5, .5, 0.1);
-        // glRotatef (-100, 0.0, 1.0, 0.0); 
-        glmDraw(&models[CRIB_MOD], GLM_FLAT);
+        glRotatef (-50, 0.0, 1.0, 0.0); 
+        glmDraw(&models[CRIB_MOD], GLM_COLOR | GLM_FLAT);
         glPopMatrix();
         if (collide_with(player)){
             show_baby = false;
