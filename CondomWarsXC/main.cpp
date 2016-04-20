@@ -37,6 +37,13 @@ using namespace std;
 GLMmodel models[MODEL_COUNT];
 bool leia = true;
 bool gameover = false;
+bool show_baby = false;
+int time_to_show_baby = 1000;
+bool paused = false;
+bool started = false;
+bool menu = true;
+int current_baby = 0;
+int current_game = 0;
 
 
 Image::Image(char* ps, int w, int h) : pixels(ps), width(w), height(h)
@@ -434,6 +441,27 @@ public:
     }
 };
 
+// Function for the baby
+void deadTimer(int value){
+    if (current_baby == value){
+        glutPostRedisplay();
+        if (started) {
+            player.setLives(0);
+        }
+    }
+}
+
+// Function for the baby
+void babyTimer(int value){
+    if (current_game == value){
+        glutPostRedisplay();
+        if (started) {
+            show_baby = true;
+            glutTimerFunc(5000, deadTimer, current_baby);
+        }
+    }
+}
+
 class Baby{
 private:
     float xPos;
@@ -447,18 +475,25 @@ public:
     
     void display(){
         glPushMatrix();
-        glColor3f(5, 5, 0); 
+        // glColor3ub(81, 58, 39); 
+        glColor3ub(237, 184, 235); 
         glTranslated(this->xPos, this->yPos, 0);
         glScalef(.5, .5, 0.1);
-        glRotatef (-100, 0.0, 1.0, 0.0);
-        // glRotatef (-10, 1.0, 0.0, 0.0);  
-        glmDraw(&models[CRIB_MOD], GLM_COLOR | GLM_FLAT);
+        // glRotatef (-100, 0.0, 1.0, 0.0); 
+        glmDraw(&models[CRIB_MOD], GLM_FLAT);
         glPopMatrix();
+        if (collide_with(player)){
+            show_baby = false;
+            if (time_to_show_baby > 3000){
+                time_to_show_baby -= 1000;
+            }
+            glutTimerFunc(time_to_show_baby, babyTimer, 0);
+        }
     }
 
     bool collide_with(Player player){
-        float x_right = this->xPos + 0.25;
-        float x_left = this->xPos - 0.25;
+        float x_right = this->xPos + 0.4;
+        float x_left = this->xPos - 0.4;
         float y_top = this->yPos + 0.25;
         float y_down = this->yPos - 0.25;
         float player_x_right = player.getXPos() + 0.25;
@@ -468,6 +503,7 @@ public:
         // std::cout << "object: " << x_left << ", " << x_right << ", " << y_down << ", " << y_top << "player: " << player_x_left << ", " << player_x_right << ", " << player_y_down << ", " << player_y_top << std::endl;
         bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
         if (col){
+            current_baby++;
             // std::cout<<"hey"<<std::endl;
             //PLAY SOUND
         }
@@ -478,7 +514,6 @@ public:
 
 //////////////////////////// GLOBAL VARIABLES //////////////////////////////////
 
-bool paused = false, started = false, menu = true;
 int tenthsOfASecond = 0;
 Object enemies[10];
 Baby baby;
@@ -489,6 +524,7 @@ const int TOTAL_OBJECTS = 4;
 static GLuint texName[TEXTURE_COUNT];
 
 ////////////////////////////////////////////////////////////////////////////////
+
 
 void loadTexture(Image* image,int k)
 {
@@ -581,7 +617,10 @@ void resetGame(){
     tenthsOfASecond = 0;
     started = false;
     leia =  true;
+    show_baby = false;
+    current_baby++;
     player.reset();
+    current_game++;
     resetEnemies();
 }
 
@@ -639,11 +678,8 @@ void displayEnemies(){
 
 void checkForGameOver(){
     if (player.getLives() <= 0){
+        resetGame();
         gameover = true;
-        started = false;
-        leia =  true;
-        menu = false;
-        paused = false;
     }
 }
 
@@ -793,7 +829,9 @@ void display(){
         displayLives();
         displayPlayer();
         displayEnemies();
-        displayBaby();
+        if (show_baby){
+            displayBaby();
+        }
     }
     if (gameover){
         glColor3f(1.0, 1.0, 1.0);
@@ -846,6 +884,7 @@ void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
                 menu = false;
                 paused = false;
                 glutTimerFunc(100, timePassBy, 0);
+                glutTimerFunc(time_to_show_baby, babyTimer, current_game);
             }
             break;
         case 'l':
@@ -857,6 +896,7 @@ void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
                 gameover = false;
                 paused = false;
                 glutTimerFunc(100, timePassBy, 0);
+                glutTimerFunc(time_to_show_baby, babyTimer, current_game);
             }
             break;
         case 27:
@@ -936,7 +976,7 @@ void initRendering(){
     glmUnitize(&models[R2_MOD]);
     glmVertexNormals(&models[R2_MOD], 90.0, GL_TRUE);
 
-    ruta_modelos = fullPath + "objects/crib/Baby_Carriage.obj";
+    ruta_modelos = fullPath + "objects/new_crib/3d-model.obj";
     std::cout << "Filepath: " << ruta_modelos << std::endl;
     models[CRIB_MOD] = *glmReadOBJ(ruta_modelos.c_str());
     glmUnitize(&models[CRIB_MOD]);
