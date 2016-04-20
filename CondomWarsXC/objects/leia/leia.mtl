@@ -1,24 +1,16 @@
 newmtl blinn1SG
-illum 4
-Kd 0.00 0.00 0.00
+Kd 0.40 0.23 0.16
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd hair.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 newmtl blinn2SG
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
+Kd 0.6 0.47945 0.46301
+Ka 0.6 0.47945 0.46301
 Tf 1.00 1.00 1.00
-map_Kd face.png
-Ni 1.00
-Ks 0.50 0.50 0.50
+Ks 0.6 0.47945 0.46301
 newmtl blinn3SG
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
+Kd 1.00 1.00 1.00
+Ka 1.00 1.00 1.00
 Tf 1.00 1.00 1.00
-map_Kd 10198_Princess_Leia.JPG
-Ni 1.00
 Ks 0.50 0.50 0.50

@@ -1,0 +1,141 @@
+#==================================================
+#Material list
+#This file has been created by PoseRay v3.12.2.456
+#3D model to POV-Ray/Moray Converter.
+#Author: FlyerX
+#Email: flyerx_2000@yahoo.com
+#Web: http://mysite.verizon.net/sfg0000/
+#==================================================
+ 
+#==================================================
+newmtl ACAD_color_4
+Ns 2.5
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+d 1
+#r 0
+#blend 0
+#cell_hi
+ 
+#==================================================
+newmtl ACAD_color_25
+Ns 2.5
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+d 1
+#r 0
+#blend 0
+#cell_hi
+ 
+#==================================================
+newmtl ACAD_color_1
+Ns 2.5
+Ka 0 0 0
+Kd 1 0 0
+Ks 0 0 0
+d 1
+#r 0
+#blend 0
+#cell_hi
+ 
+#==================================================
+newmtl ACAD_color_2
+Ns 2.5
+Ka 0 0 0
+Kd 1 1 0
+Ks 0 0 0
+d 1
+#r 0
+#blend 0
+#cell_hi
+ 
+#==================================================
+newmtl ACAD_color_7
+Ns 2.5
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+d 1
+#r 0
+#blend 0
+#cell_hi
+ 
+#==================================================
+newmtl ACAD_color_3
+Ns 2.5
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+d 1
+#r 0
+#blend 0
+#cell_hi
+ 
+#==================================================
+newmtl ACAD_color_27
+Ns 2.5
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+d 1
+#r 0
+#blend 0
+#cell_hi
+ 
+#==================================================
+newmtl ACAD_color_250
+Ns 2.5
+Ka 0 0 0
+Kd 0.2 0.2 0.2
+Ks 0 0 0
+d 1
+#r 0
+#blend 0
+#cell_hi
+ 
+#==================================================
+newmtl ACAD_color_22
+Ns 2.5
+Ka 0 0 0
+Kd 0.7411765 0.1803922 0
+Ks 0 0 0
+d 1
+#r 0
+#blend 0
+#cell_hi
+ 
+#==================================================
+newmtl ACAD_color_34
+Ns 2.5
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+d 1
+#r 0
+#blend 0
+#cell_hi
+ 
+#==================================================
+newmtl ACAD_color_127
+Ns 2.5
+Ka 0 0 0
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0 0 0
+d 1
+#r 0
+#blend 0
+#cell_hi
+ 
+#==================================================
+newmtl ACAD_color_44
+Ns 2.5
+Ka 0 0 0
+Kd 1 0 0
+Ks 0 0 0
+d 1
+#r 0
+#blend 0
+#cell_hi
+ 

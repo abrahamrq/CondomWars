@@ -30,11 +30,13 @@ using namespace std;
 #define HAN_MOD 1
 #define CONDOM_MOD 2
 #define SPERM_MOD 3
-#define BEAR_MOD 4
+#define R2_MOD 4
 //#define SOAP_2_MOD 3
 //#define TOOTHPASTE_MOD 4
 
 GLMmodel models[MODEL_COUNT];
+bool leia = true;
+bool gameover = false;
 
 
 Image::Image(char* ps, int w, int h) : pixels(ps), width(w), height(h)
@@ -250,7 +252,7 @@ private:
     
 public:
     Player(){
-        lives = 3;
+        lives = 1;
         score = 0;
         name = "";
     }
@@ -296,11 +298,15 @@ public:
     }
     
     void display(){
-        glColor3f(0, 0, 0);
         glPushMatrix();
+        glColor3f(0, 0, 0);
         glTranslated(this->xPos, this->yPos, 0);
         glScalef(.5, .5, 0.1);
-        glmDraw(&models[LEIA_MOD], GLM_COLOR | GLM_FLAT);
+        if (leia){
+            glmDraw(&models[LEIA_MOD], GLM_COLOR | GLM_FLAT);
+        } else {
+            glmDraw(&models[HAN_MOD], GLM_COLOR | GLM_FLAT);
+        }
         glPopMatrix();
     }
     
@@ -353,17 +359,20 @@ public:
     }
     
     void display(){
-        glColor3f(5, 5, 0);
         glPushMatrix();
+        glColor3f(5, 5, 0); 
         glTranslated(this->xPos, this->yPos, 0);
         glScalef(.5, .5, 0.1);
         if (this->type == 0){
-            glmDraw(&models[CONDOM_MOD], GLM_FLAT);
+            glmDraw(&models[CONDOM_MOD], GLM_COLOR | GLM_FLAT);
         } else if (this->type == 1){
-            glmDraw(&models[SPERM_MOD], GLM_FLAT);
+            glmDraw(&models[SPERM_MOD], GLM_COLOR | GLM_FLAT);
         } else if (this->type == 2){
             glScalef(.5, .5, 0.1);
-            glmDraw(&models[BEAR_MOD],GLM_FLAT);
+            glRotatef (100, 1.0, 0.0, 0.0);
+            // glRotatef (180, 0.0, 1.0, 0.0);
+            glRotatef (90, 0.0, 0.0, 1.0);
+            glmDraw(&models[R2_MOD], GLM_COLOR | GLM_FLAT);
         }
         glPopMatrix();
     }
@@ -383,10 +392,10 @@ public:
         float player_x_left = player.getXPos() - 0.25;
         float player_y_top = player.getYPos() + 0.5;
         float player_y_down = player.getYPos() - 0.5;
-        std::cout << "object: " << x_left << ", " << x_right << ", " << y_down << ", " << y_top << "player: " << player_x_left << ", " << player_x_right << ", " << player_y_down << ", " << player_y_top << std::endl;
+        // std::cout << "object: " << x_left << ", " << x_right << ", " << y_down << ", " << y_top << "player: " << player_x_left << ", " << player_x_right << ", " << player_y_down << ", " << player_y_top << std::endl;
         bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
         if (col){
-            std::cout<<"hey"<<std::endl;
+            // std::cout<<"hey"<<std::endl;
             //PLAY SOUND
         }
         return col;
@@ -418,7 +427,7 @@ int tenthsOfASecond = 0;
 Object enemies[10];
 int notUsed[10];
 std::string fullPath = __FILE__;
-const int TEXTURE_COUNT = 2;
+const int TEXTURE_COUNT = 3;
 const int TOTAL_OBJECTS = 5;
 static GLuint texName[TEXTURE_COUNT];
 
@@ -486,8 +495,7 @@ void generateEnemies(){
     int random;
     
     for (int i = 0; i < TOTAL_OBJECTS; i++) {
-        random = rand() % 8 - 4;
-        enemies[i] = Object(0, random);
+        enemies[i] = Object(rand() % 3,  rand() % 8 - 4);
     }
 }
 
@@ -511,6 +519,16 @@ void paintObjects(){
     }
 }
 
+void checkForGameOver(){
+    if (player.getLives() <= 0){
+        gameover = true;
+        started = false;
+        leia =  false;
+        menu = false;
+        paused = false;
+    }
+}
+
 // Function for the timer
 void timePassBy(int value){
     glutPostRedisplay();
@@ -520,14 +538,13 @@ void timePassBy(int value){
     if (!paused){
         glutTimerFunc(100, timePassBy, 0);
     }
-    
     paintObjects();
 }
 
 // Function to display timer
 void displayTime(){
     std::string time_formatted = format(tenthsOfASecond);
-    glColor3f(0, 0, 0);
+    glColor3f(1, 1, 1);
     glRasterPos2f(-4, 4);
     for (int i = 0; i < time_formatted.size(); i++){
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, time_formatted[i]);
@@ -536,7 +553,7 @@ void displayTime(){
 
 // Function to generate player with defaults
 void generatePlayer(){
-    player = Player(0, "Luke", 3);
+    player = Player(0, "Luke", 1);
 }
 
 void displayPlayer(){
@@ -548,8 +565,20 @@ void displayScore(){
     buffer << "Score: ";
     buffer << player.getScore();
     std::string score = buffer.str();
-    glColor3f(0, 0, 0);
+    glColor3f(1, 1, 1);
     glRasterPos2f(2, 4);
+    for (int i = 0; i < score.size(); i++){
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, score[i]);
+    }
+}
+
+void displayGameOverScore(){
+    std::ostringstream buffer;
+    buffer << "Final Score: ";
+    buffer << player.getScore();
+    std::string score = buffer.str();
+    glColor3f(1, 1, 1);
+    glRasterPos2f(1, -1);
     for (int i = 0; i < score.size(); i++){
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, score[i]);
     }
@@ -560,7 +589,7 @@ void displayLives(){
     buffer << "Lives: ";
     buffer << player.getLives();
     std::string lives = buffer.str();
-    glColor3f(0, 0, 0);
+    glColor3f(1, 1, 1);
     glRasterPos2f(-1, 4);
     for (int i = 0; i < lives.size(); i++){
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, lives[i]);
@@ -568,54 +597,92 @@ void displayLives(){
 }
 
 void displayMenu(){
+    glEnable(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glBindTexture(GL_TEXTURE_2D, texName[0]);
     glBegin(GL_QUADS);
     //Asignar la coordenada de textura 0,0 al vertice
     glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-5.0f, -5.0f, 0);
+    glVertex3f(-4.5f, -4.5f, 0);
     //Asignar la coordenada de textura 1,0 al vertice
     glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(5.0f, -5.0f, 0);
+    glVertex3f(4.5f, -4.5f, 0);
     //Asignar la coordenada de textura 1,1 al vertice
     glTexCoord2f(1.0f,1.0f);
-    glVertex3f(5.0f, 5.0f, 0);
+    glVertex3f(4.5f, 4.5f, 0);
     //Asignar la coordenada de textura 0,1 al vertice
     glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-5.0f, 5.0f, 0);
+    glVertex3f(-4.5f, 4.5f, 0);
     glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
+void displayGameOver(){
+    glEnable(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glBindTexture(GL_TEXTURE_2D, texName[2]);
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-4.5f, -4.5f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(4.5f, -4.5f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(4.5f, 4.5f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-4.5f, 4.5f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+    glutPostRedisplay();
 }
 
 void displayBackground(){
+    glEnable(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glBindTexture(GL_TEXTURE_2D, texName[1]);
     glBegin(GL_QUADS);
     //Asignar la coordenada de textura 0,0 al vertice
     glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-5.0f, -5.0f, 0);
+    glVertex3f(-4.5f, -4.5f, 0);
     //Asignar la coordenada de textura 1,0 al vertice
     glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(5.0f, -5.0f, 0);
+    glVertex3f(4.5f, -4.5f, 0);
     //Asignar la coordenada de textura 1,1 al vertice
     glTexCoord2f(1.0f,1.0f);
-    glVertex3f(5.0f, 5.0f, 0);
+    glVertex3f(4.5f, 4.5f, 0);
     //Asignar la coordenada de textura 0,1 al vertice
     glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-5.0f, 5.0f, 0);
+    glVertex3f(-4.5f, 4.5f, 0);
     glEnd();
+    glDisable(GL_TEXTURE_2D);
 }
 
 void display(){
+    checkForGameOver();
     glPushMatrix();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glColor3f(1.0, 1.0, 1.0);
     if (menu){
+        glColor3f(1.0, 1.0, 1.0);
         displayMenu();
-    } else {
-        //displayBackground();
+    } else if (started){
+        displayBackground();
         displayTime();
         displayScore();
         displayLives();
         displayPlayer();
         displayEnemies();
+    }
+    if (gameover){
+        glColor3f(1.0, 1.0, 1.0);
+        displayGameOver();
+        displayGameOverScore();
     }
     glutSwapBuffers();
     glPopMatrix();
@@ -647,18 +714,31 @@ void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
             break;
         case 'p':
         case 'P':
-            if (started){
+            if (started && !gameover){
                 if (paused){
                     glutTimerFunc(100, timePassBy, 0);
                 }
                 paused = !paused;
             }
             break;
-        case 's':
-        case 'S':
+        case 'h':
+        case 'H':
             if (!started){
+                leia =  false;
+                gameover = false;
                 started = true;
                 menu = false;
+                paused = false;
+                glutTimerFunc(100, timePassBy, 0);
+            }
+            break;
+        case 'l':
+        case 'L':
+            if (!started){
+                leia = true;
+                started = true;
+                menu = false;
+                gameover = false;
                 paused = false;
                 glutTimerFunc(100, timePassBy, 0);
             }
@@ -688,10 +768,7 @@ void reshape(int w, int h){
 
 void init(){
     //Habilitar el uso de texturas
-    glEnable(GL_TEXTURE_2D);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-    glClearColor (1, 0, 0, 1.0);
+    glClearColor (0, 0, 0, 1.0);
     glColor3f(0.0, 0.0, 0.0);
     generatePlayer();
     generateEnemies();
@@ -702,13 +779,14 @@ void initRendering(){
     Image* image;
     GLuint i=0;
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_TEXTURE_2D);
     glGenTextures(TEXTURE_COUNT, texName); //Make room for our texture
     char ruta[200];
-    sprintf(ruta,"%s%s", fullPath.c_str() , "images/menu1.bmp");
+    sprintf(ruta,"%s%s", fullPath.c_str() , "images/start.bmp");
     image = loadBMP(ruta);
     loadTexture(image,i++);
-    sprintf(ruta,"%s%s", fullPath.c_str() , "images/fondo.bmp");
+    sprintf(ruta,"%s%s", fullPath.c_str() , "images/fondo_star_wars.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    sprintf(ruta,"%s%s", fullPath.c_str() , "images/gameover.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     delete image;
     std::string ruta_modelos = fullPath + "objects/leia/leia.obj";
@@ -735,11 +813,11 @@ void initRendering(){
     glmUnitize(&models[SPERM_MOD]);
     glmVertexNormals(&models[SPERM_MOD], 90.0, GL_TRUE);
     
-    ruta_modelos = fullPath + "objects/teddy bear/bear.obj";
+    ruta_modelos = fullPath + "objects/r2-d2-obj/r2_d2.obj";
     std::cout << "Filepath: " << ruta_modelos << std::endl;
-    models[BEAR_MOD] = *glmReadOBJ(ruta_modelos.c_str());
-    glmUnitize(&models[BEAR_MOD]);
-    glmVertexNormals(&models[BEAR_MOD], 90.0, GL_TRUE);
+    models[R2_MOD] = *glmReadOBJ(ruta_modelos.c_str());
+    glmUnitize(&models[R2_MOD]);
+    glmVertexNormals(&models[R2_MOD], 90.0, GL_TRUE);
 }
 
 void timer(int value)
