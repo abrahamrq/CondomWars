@@ -34,8 +34,7 @@ using namespace std;
 #define CONDOM_MOD 2
 #define SPERM_MOD 3
 #define R2_MOD 4
-//#define SOAP_2_MOD 3
-//#define TOOTHPASTE_MOD 4
+#define CRIB_MOD 5
 
 GLMmodel models[MODEL_COUNT];
 bool leia = true;
@@ -48,6 +47,13 @@ Mix_Music *gScratch = NULL;
 Mix_Chunk *gHigh = NULL;
 Mix_Chunk *gMedium = NULL;
 Mix_Chunk *gLow = NULL;
+bool show_baby = false;
+int time_to_show_baby = 1000;
+bool paused = false;
+bool started = false;
+bool menu = true;
+int current_baby = 0;
+int current_game = 0;
 
 
 Image::Image(char* ps, int w, int h) : pixels(ps), width(w), height(h)
@@ -335,6 +341,7 @@ public:
     
     void reset(){
         this->score = 0;
+        this->lives = 3;
         xPos = 0;
         yPos = -3;
     }
@@ -355,7 +362,14 @@ public:
         yPos = 0;
     }
     
-    Object(int type, float xPos){
+    Object(int random, float xPos){
+        if (random <= 8){
+            this->type = 1;
+        } else if (random == 9){
+            this->type = 0;
+        } else{
+            this->type = 2;
+        }
         this->type = type;
         this->xPos = xPos;
         this->yPos = 3;
@@ -390,8 +404,15 @@ public:
 
     void reset_position(){
         this->xPos = rand() % 8 - 4;
-        this->yPos = 3;
-        this->type =  rand() % 3;
+        this->yPos = rand() % 5 + 3;
+        int random = rand() % 11;
+        if (random <= 8){
+            this->type = 1;
+        } else if (random == 9){
+            this->type = 0;
+        } else{
+            this->type = 2;
+        }
     }
 
     bool collide_with(Player player){
@@ -436,20 +457,91 @@ public:
         }
     }
 };
+
+// Function for the baby
+void deadTimer(int value){
+    if (current_baby == value){
+        glutPostRedisplay();
+        if (started) {
+            player.setLives(0);
+        }
+    }
+}
+
+// Function for the baby
+void babyTimer(int value){
+    if (current_game == value){
+        glutPostRedisplay();
+        if (started) {
+            show_baby = true;
+            glutTimerFunc(5000, deadTimer, current_baby);
+        }
+    }
+}
+
+class Baby{
+private:
+    float xPos;
+    float yPos;
+    
+public:
+    Baby(){
+        xPos = 3.5;
+        yPos = -3.5;
+    }
+    
+    void display(){
+        glPushMatrix();
+        // glColor3ub(81, 58, 39); 
+        glColor3ub(237, 184, 235); 
+        glTranslated(this->xPos, this->yPos, 0);
+        glScalef(.5, .5, 0.1);
+        glRotatef (-50, 0.0, 1.0, 0.0); 
+        glmDraw(&models[CRIB_MOD], GLM_COLOR | GLM_FLAT);
+        glPopMatrix();
+        if (collide_with(player)){
+            show_baby = false;
+            if (time_to_show_baby > 3000){
+                time_to_show_baby -= 1000;
+            }
+            glutTimerFunc(time_to_show_baby, babyTimer, 0);
+        }
+    }
+
+    bool collide_with(Player player){
+        float x_right = this->xPos + 0.4;
+        float x_left = this->xPos - 0.4;
+        float y_top = this->yPos + 0.25;
+        float y_down = this->yPos - 0.25;
+        float player_x_right = player.getXPos() + 0.25;
+        float player_x_left = player.getXPos() - 0.25;
+        float player_y_top = player.getYPos() + 0.5;
+        float player_y_down = player.getYPos() - 0.5;
+        // std::cout << "object: " << x_left << ", " << x_right << ", " << y_down << ", " << y_top << "player: " << player_x_left << ", " << player_x_right << ", " << player_y_down << ", " << player_y_top << std::endl;
+        bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
+        if (col){
+            current_baby++;
+            // std::cout<<"hey"<<std::endl;
+            //PLAY SOUND
+        }
+        return col;
+    }
+};
 ////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////// GLOBAL VARIABLES //////////////////////////////////
 
-bool paused = false, started = false, menu = true;
 int tenthsOfASecond = 0;
 Object enemies[10];
+Baby baby;
 int notUsed[10];
 std::string fullPath = __FILE__;
 const int TEXTURE_COUNT = 3;
-const int TOTAL_OBJECTS = 5;
+const int TOTAL_OBJECTS = 4;
 static GLuint texName[TEXTURE_COUNT];
 
 ////////////////////////////////////////////////////////////////////////////////
+
 
 void loadTexture(Image* image,int k)
 {
@@ -503,29 +595,6 @@ std::string format(int tenthsOfASecond){
     return buffer.str();
 }
 
-void initializeNotUsed(){
-    for (int i = 0; i < 10; i++) {
-        notUsed[i] = 0;
-    }
-}
-
-void generateEnemies(){
-    int random;
-    
-    for (int i = 0; i < TOTAL_OBJECTS; i++) {
-        enemies[i] = Object(rand() % 3,  rand() % 8 - 4);
-    }
-}
-
-void displayEnemies(){
-    for (int i = 0; i < TOTAL_OBJECTS; i++) {
-        if (!(notUsed[i] == 0)){
-            enemies[i].display();
-            enemies[i].move_down();
-        }
-    }
-}
-
 void paintObjects(){
     if (tenthsOfASecond % TOTAL_OBJECTS == 0) {
         for (int i = 0; i < TOTAL_OBJECTS; i++) {
@@ -534,16 +603,6 @@ void paintObjects(){
                 break;
             }
         }
-    }
-}
-
-void checkForGameOver(){
-    if (player.getLives() <= 0){
-        gameover = true;
-        started = false;
-        leia =  false;
-        menu = false;
-        paused = false;
     }
 }
 
@@ -559,6 +618,88 @@ void timePassBy(int value){
     paintObjects();
 }
 
+typedef enum {RESET,PAUSE,FINISH};
+
+void resetEnemies(){
+    for (int i = 0; i < TOTAL_OBJECTS; i++) {
+        enemies[i].reset_position();
+    }
+}
+
+void resetGame(){
+    paused = false;
+    started = false;
+    menu = true;
+    gameover = false;
+    tenthsOfASecond = 0;
+    started = false;
+    leia =  true;
+    show_baby = false;
+    current_baby++;
+    player.reset();
+    current_game++;
+    resetEnemies();
+}
+
+void onMenu(int opcion) {
+    switch(opcion) {
+        case RESET:
+            resetGame();
+            break;
+        case PAUSE:
+            if (started && !gameover){
+                if (paused){
+                    glutTimerFunc(100, timePassBy, 0);
+                }
+                paused = !paused;
+            }
+            break;
+        case FINISH:
+            exit(0);    
+            break;
+    }
+}
+
+void creacionMenu(void) {
+    int mainMenu;
+    mainMenu = glutCreateMenu(onMenu);
+    glutSetMenu(mainMenu);
+    glutAddMenuEntry("Reiniciar Juego", RESET);
+    glutAddMenuEntry("Pausar Juego", PAUSE);
+    glutAddMenuEntry("Terminar Juego", FINISH);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
+
+}
+
+void initializeNotUsed(){
+    for (int i = 0; i < 10; i++) {
+        notUsed[i] = 0;
+    }
+}
+
+void generateEnemies(){
+    int random;
+    for (int i = 0; i < TOTAL_OBJECTS; i++) {
+        enemies[i] = Object(rand() % 10,  rand() % 8 - 4);
+    }
+}
+
+void displayEnemies(){
+    for (int i = 0; i < TOTAL_OBJECTS; i++) {
+        if (!(notUsed[i] == 0)){
+            enemies[i].display();
+            enemies[i].move_down();
+        }
+    }
+}
+
+void checkForGameOver(){
+    if (player.getLives() <= 0){
+        resetGame();
+        gameover = true;
+    }
+}
+
 // Function to display timer
 void displayTime(){
     std::string time_formatted = format(tenthsOfASecond);
@@ -571,12 +712,21 @@ void displayTime(){
 
 // Function to generate player with defaults
 void generatePlayer(){
-    player = Player(0, "Luke", 1);
+    player = Player(0, "Luke", 3);
+}
+
+void generateBaby(){
+    baby = Baby();
 }
 
 void displayPlayer(){
     player.display();
 }
+
+void displayBaby(){
+    baby.display();
+}
+
 
 void displayScore(){
     std::ostringstream buffer;
@@ -714,6 +864,9 @@ void display(){
         displayLives();
         displayPlayer();
         displayEnemies();
+        if (show_baby){
+            displayBaby();
+        }
     }
     if (gameover){
         glColor3f(1.0, 1.0, 1.0);
@@ -766,6 +919,7 @@ void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
                 menu = false;
                 paused = false;
                 glutTimerFunc(100, timePassBy, 0);
+                glutTimerFunc(time_to_show_baby, babyTimer, current_game);
             }
             break;
         case 'l':
@@ -777,6 +931,7 @@ void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
                 gameover = false;
                 paused = false;
                 glutTimerFunc(100, timePassBy, 0);
+                glutTimerFunc(time_to_show_baby, babyTimer, current_game);
             }
             break;
         case 27:
@@ -814,6 +969,7 @@ void init(){
     glClearColor (0, 0, 0, 1.0);
     glColor3f(0.0, 0.0, 0.0);
     generatePlayer();
+    generateBaby();
     generateEnemies();
 }
 
@@ -861,6 +1017,12 @@ void initRendering(){
     models[R2_MOD] = *glmReadOBJ(ruta_modelos.c_str());
     glmUnitize(&models[R2_MOD]);
     glmVertexNormals(&models[R2_MOD], 90.0, GL_TRUE);
+
+    ruta_modelos = fullPath + "objects/new_crib/3d-model.obj";
+    std::cout << "Filepath: " << ruta_modelos << std::endl;
+    models[CRIB_MOD] = *glmReadOBJ(ruta_modelos.c_str());
+    glmUnitize(&models[CRIB_MOD]);
+    glmVertexNormals(&models[CRIB_MOD], 90.0, GL_TRUE);
 }
 
 void timer(int value)
@@ -882,6 +1044,7 @@ int main(int argc, char** argv){
     glutSpecialFunc(specialActions);
     init();
     initRendering();
+    creacionMenu();
     glutTimerFunc(1000,timer,0);
     glutMainLoop();
 }
