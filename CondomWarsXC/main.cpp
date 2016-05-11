@@ -1,7 +1,7 @@
 // Oscar Abraham Rodriguez Quintanilla
 // A01195653
 // Tania Garrido Salido
-// A0
+// A01138941
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -46,7 +46,7 @@ Mix_Music *gMusic = NULL;
 Mix_Music *gScratch = NULL;
 Mix_Chunk *gHigh = NULL;
 Mix_Chunk *gbaby = NULL;
-Mix_Chunk *gLow = NULL;
+Mix_Chunk *gOver = NULL;
 bool show_baby = false;
 int time_to_show_baby = 10000;
 bool paused = false;
@@ -57,7 +57,7 @@ bool creadores = false;
 bool historia = false;
 int current_baby = 0;
 int current_game = 0;
-int babyOfASecond = 50;
+int babyOfASecond = 80;
 
 
 Image::Image(char* ps, int w, int h) : pixels(ps), width(w), height(h)
@@ -332,14 +332,14 @@ public:
     }
     
     void move_right(){
-        if (!((xPos + .01) > 3.9)){
-            this->xPos = this->xPos + 0.1;
+        if (!((xPos + .2) > 3.9)){
+            this->xPos = this->xPos + 0.2;
         }
     }
     
     void move_left(){
-        if (!((xPos - .01) < -3.9)){
-            this->xPos = this->xPos - 0.1;
+        if (!((xPos - .2) < -3.9)){
+            this->xPos = this->xPos - 0.2;
         }
     }
     
@@ -374,7 +374,6 @@ public:
         } else{
             this->type = 2;
         }
-        this->type = type;
         this->xPos = xPos;
         this->yPos = 3;
     }
@@ -510,14 +509,20 @@ public:
         // glColor3ub(81, 58, 39); 
         glColor3ub(237, 184, 235); 
         glTranslated(this->xPos, this->yPos, 0);
+        glPushMatrix();
         glScalef(.5, .5, 0.1);
         // glRotatef (30, 0.0, 0.0, 1.0); 
         // glRotatef (30, 0.0, 1.0, 0.0); 
         // glRotatef (30, 1.0, 0.0, 0.0); 
         glmDraw(&models[CRIB_MOD], GLM_COLOR | GLM_FLAT);
         glPopMatrix();
+        glScalef(.5, .5, 0.01);
+        glRotatef (100, 1.0, 0.0, 0.0);
+        glRotatef (30, 0.0, 1.0, 0.0);
+        glRotatef (210, 0.0, 0.0, 1.0);
+        glmDraw(&models[R2_MOD], GLM_COLOR | GLM_FLAT);
+        glPopMatrix();
         if (collide_with(player)){
-            
             show_baby = false;
             if (time_to_show_baby > 5000){
                 time_to_show_baby -= 500;
@@ -539,7 +544,7 @@ public:
         bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
         if (col){
             current_baby++;
-            babyOfASecond = 50;
+            babyOfASecond = 80;
             // std::cout<<"hey"<<std::endl;
             //PLAY SOUND
             
@@ -658,7 +663,7 @@ void resetGame(){
     current_baby++;
     player.reset();
     current_game++;
-    babyOfASecond = 50;
+    babyOfASecond = 80;
     resetEnemies();
 }
 
@@ -699,7 +704,6 @@ void initializeNotUsed(){
 }
 
 void generateEnemies(){
-    int random;
     for (int i = 0; i < TOTAL_OBJECTS; i++) {
         enemies[i] = Object(rand() % 10,  rand() % 8 - 4);
     }
@@ -717,6 +721,13 @@ void displayEnemies(){
 void checkForGameOver(){
     if (player.getLives() <= 0){
         resetGame();
+        gOver = Mix_LoadWAV( "/Users/taniagarridosalido/Dropbox/ITESM-ITC Decimo Semestre/Graficas/CondomWars/CondomWarsXC/audio/die.wav");
+        if( gOver == NULL )
+        {
+            printf( "Failed to load gSaber sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        } else {
+            Mix_PlayChannel( 1, gOver, 0 );
+        }
         gameover = true;
     }
 }
@@ -1000,6 +1011,12 @@ void specialActions(int key, int x, int y){
 
 void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
     switch (theKey){
+        case 'r':
+        case 'R':
+            if (gameover) {
+                resetGame();
+            }
+            break;
         case 'p':
         case 'P':
             if (started && !gameover && !menu){
@@ -1071,6 +1088,7 @@ void keyboardActions(unsigned char theKey, int mouseX, int mouseY){
 void reshape(int w, int h){
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
+    glEnable(GL_LIGHT0);
     glLoadIdentity();
     // glOrtho(-250.0, 250.0, -250.0, 250.0, -250.0, 250.0);
     // glFrustum(-250.0, 250.0, -250.0, 250.0, -250.0, 250.0);
