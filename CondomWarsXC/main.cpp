@@ -431,7 +431,9 @@ public:
         bool col = ((y_top >= player_y_down && y_down <= player_y_top) && (x_right >= player_x_left && x_left <= player_x_right));
         if (col){
             // std::cout<<"hey"<<std::endl;
-            gHigh = Mix_LoadWAV( "/Users/taniagarridosalido/Dropbox/ITESM-ITC Decimo Semestre/Graficas/CondomWars/CondomWarsXC/audio/high.wav");
+            char ruta[200];
+            sprintf(ruta,"%s%s", fullPath.c_str() , "audio/high.wav");
+            gHigh = Mix_LoadWAV(ruta);
             if( gHigh == NULL )
             {
                 printf( "Failed to load gSaber sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
@@ -481,7 +483,9 @@ void babyTimer(int value){
         glutPostRedisplay();
         if (started) {
             show_baby = true;
-            gbaby = Mix_LoadWAV( "/Users/taniagarridosalido/Dropbox/ITESM-ITC Decimo Semestre/Graficas/CondomWars/CondomWarsXC/audio/cry.wav");
+            char ruta[200];
+            sprintf(ruta,"%s%s", fullPath.c_str() , "audio/cry.wav");
+            gbaby = Mix_LoadWAV(ruta);
             if( gbaby == NULL )
             {
                 printf( "Failed to load gSaber sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
@@ -942,7 +946,9 @@ void displayBackground(){
 
 void cargarmusica(){
     //Load sound effects
-    gScratch = Mix_LoadMUS( "/Users/taniagarridosalido/Dropbox/ITESM-ITC Decimo Semestre/Graficas/CondomWars/CondomWarsXC/audio/imperial_march.wav" );
+    char ruta[200];
+    sprintf(ruta,"%s%s", fullPath.c_str() , "audio/imperial_march.wav");
+    gScratch = Mix_LoadMUS(ruta);
     if( gScratch == NULL )
     {
         printf( "Failed to load gSaber sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
